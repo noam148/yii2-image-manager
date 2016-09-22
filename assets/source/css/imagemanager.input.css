@@ -1,0 +1,6 @@
+#modal-imagemanager{ z-index: 999999; }
+#modal-imagemanager .modal-header h4{ margin: 0; }
+#modal-imagemanager iframe{ border: none; width: 100%; min-height: 500px; }
+
+.image-manager-input{}
+.image-manager-input .img-preview{ margin-top: 10px; max-width: 200px; max-height: 200px; }

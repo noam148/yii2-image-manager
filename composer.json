@@ -1,0 +1,23 @@
+{
+    "name": "noam148/yii2-image-manager",
+    "description": "A Yii2 module/widget for upload and cropping images",
+    "keywords": ["yii2", "extension", "widget", "module", "image", "upload", "crop", "manager"],
+    "homepage": "https://github.com/noam148/yii2-image-manager",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Noam148",
+			"homepage": "https://github.com/noam148/"
+        }
+    ],
+    "require": {
+        "himiklab/yii2-easy-thumbnail-image-helper" : "*",
+		"kartik-v/yii2-widget-fileinput": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "noam148\\imagemanager\\": ""
+        }
+    }
+}
