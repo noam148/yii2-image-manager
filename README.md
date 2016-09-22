@@ -10,19 +10,19 @@ The preferred way to install this extension is through [composer](http://getcomp
 * Either run
 
 ```
-php composer.phar require "noam148/yii2-image-manager" "*"
+php composer.phar require "noam148/yii2-image-manager" "dev-master"
 ```
 or add
 
 ```json
-"noam148/yii2-image-manager" : "*"
+"noam148/yii2-image-manager" : "dev-master"
 ```
 
 to the require section of your application's `composer.json` file.
 
 * Run the migrate to create the ImageManager table
 ```
-yii migrate --migrationPath=@noam148/imagemanager/migrations
+yii migrate --migrationPath=@noam148/yii2-image-manager/migrations
 ```
 
 * Add a new component in `components` section of your application's configuration file, for example:
@@ -30,7 +30,7 @@ yii migrate --migrationPath=@noam148/imagemanager/migrations
 ```php
 'components' => [
     'imagemanager' => [
-		'class' => '\noam148\imagemanager\components\ImageManagerGetPath',
+		'class' => 'noam148\imagemanager\components\ImageManagerGetPath',
 		//set media path (outside the web folder is possible)
 		'mediaPath' => '/path/where/to/store/images/media/imagemanager', 
 		//if run the component from the frontend and you wan't to reach the file from the backend. Set the path (optional)
@@ -44,7 +44,7 @@ and in `modules` section, for example:
 ```php
 'modules' => [
 	'imagemanager' => [
-		'class' => '\noam148\imagemanager\Module',
+		'class' => 'noam148\imagemanager\Module',
 		//add css files (to use in media manage selector iframe)
 		'cssFiles' => [
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',

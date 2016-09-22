@@ -43,7 +43,7 @@ class Module extends \yii\base\Module
 			throw new InvalidConfigException("Component param 'mediaPath' need to be set to a location");
 		}
 		//set asset path
-		$this->assetPublishedUrl = (new AssetManager)->getPublishedUrl("@vendor/gillz/imagemanager/assets/source");
+		$this->assetPublishedUrl = (new AssetManager)->getPublishedUrl("@vendor/noam148/yii2-image-manager/assets/source");
     }
 	
 	/**
