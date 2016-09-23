@@ -22,7 +22,7 @@ to the require section of your application's `composer.json` file.
 
 * Run the migrate to create the ImageManager table
 ```
-yii migrate --migrationPath=@noam148/yii2-image-manager/migrations
+yii migrate --migrationPath=@noam148/imagemanager/migrations
 ```
 
 * Add a new component in `components` section of your application's configuration file, for example:
