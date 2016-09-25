@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
+use yii\helpers\Json;
 use yii\helpers\BaseFileHelper;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -83,7 +84,9 @@ class ManagerController extends Controller
 		$this->view->registerJs("imageManagerModule.fieldId = '".$inputFieldId."';", 3);
 		$this->view->registerJs("imageManagerModule.cropRatio = '".$cropAspectRatio."';", 3);
 		$this->view->registerJs("imageManagerModule.cropViewMode = '".$cropViewMode."';", 3);
-		
+		$this->view->registerJs("imageManagerModule.message = ".Json::encode([
+			'deleteMessage' => Yii::t('imagemanager','Are you sure you want to delete this image?'),
+		]).";", 3);
 		
         $searchModel = new ImageManagerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

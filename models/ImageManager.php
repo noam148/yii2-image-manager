@@ -61,11 +61,11 @@ class ImageManager extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('image-manager', 'ID'),
-            'fileName' => Yii::t('image-manager', 'File Name'),
-            'fileHash' => Yii::t('image-manager', 'File Hash'),
-            'created' => Yii::t('image-manager', 'Created'),
-            'modified' => Yii::t('image-manager', 'Modified'),
+            'id' => Yii::t('imagemanager', 'ID'),
+            'fileName' => Yii::t('imagemanager', 'File Name'),
+            'fileHash' => Yii::t('imagemanager', 'File Hash'),
+            'created' => Yii::t('imagemanager', 'Created'),
+            'modified' => Yii::t('imagemanager', 'Modified'),
         ];
     }
 	

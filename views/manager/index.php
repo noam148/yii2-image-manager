@@ -18,11 +18,11 @@ $this->title = "Image manager";
 				<div class="action-buttons">
 					<a href="#" class="btn btn-primary apply-crop">
 						<i class="fa fa-crop"></i>
-						<span class="hidden-xs">Crop</span>
+						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
 					</a>
 					<a href="#" class="btn btn-default cancel-crop">
 						<i class="fa fa-undo"></i>
-						<span class="hidden-xs">Cancel</span>
+						<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
 					</a>
 				</div>
 			</div> 
@@ -44,7 +44,7 @@ $this->title = "Image manager";
 		</div>
 		<div class="col-xs-6 col-sm-2 col-options">
 			<div class="form-group">
-				<?=Html::textInput('input-mediamanager-search', null, ['id'=>'input-mediamanager-search', 'class'=>'form-control', 'placeholder'=>'Search...'])?>
+				<?=Html::textInput('input-mediamanager-search', null, ['id'=>'input-mediamanager-search', 'class'=>'form-control', 'placeholder'=>Yii::t('imagemanager','Search').'...'])?>
 			</div>
 			
 			<?=FileInput::widget([
@@ -83,7 +83,7 @@ $this->title = "Image manager";
 				<div class="edit-buttons">
 					<a href="#" class="btn btn-primary btn-block crop-image-item">
 						<i class="fa fa-crop"></i>
-						<span class="hidden-xs">Crop</span>
+						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
 					</a>
 				</div>
 				<div class="details">
@@ -91,10 +91,10 @@ $this->title = "Image manager";
 					<div class="created"></div>
 					<div class="fileSize"></div>
 					<div class="dimensions"><span class="dimension-width"></span> × <span class="dimension-height"></span></div>
-					<a href="#" class="text-danger delete-image-item" >Delete</a>
+					<a href="#" class="text-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></a>
 				</div>
 				<?php if($viewMode === "iframe"): ?>
-				<a href="#" class="btn btn-primary btn-block pick-image-item">Select</a> 
+				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a> 
 				<?php endif; ?>
 			</div>
 		</div>

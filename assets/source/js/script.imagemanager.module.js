@@ -6,6 +6,8 @@ var imageManagerModule = {
 	defaultImageId: null,
 	//current selected image
 	selectedImage: null,
+	//language
+	message: null,
 	//init imageManager
 	init: function(){
 		//init cropper
@@ -60,7 +62,7 @@ var imageManagerModule = {
 	//delete the selected image
 	deleteSelectedImage: function(){
 		//confirm message
-		if(confirm("Weet u zeker dat u de afbeelding wilt verwijderen?")){
+		if(confirm(imageManagerModule.message.deleteMessage)){
 			//close editor
 			imageManagerModule.editor.close();
 			//check if isset image

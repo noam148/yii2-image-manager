@@ -29,8 +29,8 @@ class Module extends \yii\base\Module
     {
         parent::init();
 		//set language
-		if (!isset(Yii::$app->i18n->translations['image-manager'])) {
-            Yii::$app->i18n->translations['image-manager'] = [
+		if (!isset(Yii::$app->i18n->translations['imagemanager'])) {
+            Yii::$app->i18n->translations['imagemanager'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
                 'basePath' => '@noam148/imagemanager/messages'
