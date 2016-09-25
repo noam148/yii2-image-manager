@@ -51,11 +51,14 @@ var imageManagerInput = {
 		//remove value of the input field
 		var sFieldId = inputId;
 		var sFieldNameId = sFieldId+"_name";
+		var sImagePreviewId = sFieldId+"_image";
 		//set input data		
 		$('#'+sFieldId).val("");
 		$('#'+sFieldNameId).val("");
 		//trigger change
 		$('#'+sFieldId).trigger("change");
+		//hide image
+		$('#'+sImagePreviewId).attr("src","").addClass("hide");	
 		//delete hide class
 		$(".delete-selected-image[data-input-id='"+inputId+"']").addClass("hide");
 	}
