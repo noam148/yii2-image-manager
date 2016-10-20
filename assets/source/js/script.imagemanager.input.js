@@ -1,5 +1,7 @@
 var imageManagerInput = {
 	baseUrl: null,
+	//language
+	message: null,
 	//init imageManagerInput
 	init: function(){
 		//create modal
@@ -52,6 +54,13 @@ var imageManagerInput = {
 		var sFieldId = inputId;
 		var sFieldNameId = sFieldId+"_name";
 		var sImagePreviewId = sFieldId+"_image";
+		var bShowConfirm = JSON.parse($(".delete-selected-image[data-input-id='"+inputId+"']").data("show-delete-confirm"));
+		//show warning if bShowConfirm == true
+		if(bShowConfirm){
+			if(confirm(imageManagerInput.message.detachWarningMessage) == false){
+				return false;
+			}
+		}		
 		//set input data		
 		$('#'+sFieldId).val("");
 		$('#'+sFieldNameId).val("");
@@ -67,7 +76,6 @@ var imageManagerInput = {
 $(document).ready(function () {
 	//init Image manage
 	imageManagerInput.init();
-	
 	
 	//open media manager modal
 	$(document).on("click", ".open-modal-imagemanager", function () {

@@ -68,6 +68,7 @@ To load the image picker see below (make sure you have a field in you table wher
 echo $form->field($model, 'ImageManager_id_avatar')->widget(\noam148\imagemanager\components\ImageManagerInputWidget::className(), [
 	'aspectRatio' => (16/9), //set the aspect ratio
 	'showPreview' => true, //false to hide the preview
+	'showDeletePickedImageConfirm' => false, //on true show warning before detach image
 ]);
 ```
 ![Image widget](/docs/images/img_doc-image-widget.jpg)

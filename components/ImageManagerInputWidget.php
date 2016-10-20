@@ -1,8 +1,10 @@
 <?php
 namespace noam148\imagemanager\components;
 
+use Yii;
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
+use yii\helpers\Json;
 use yii\helpers\Url;
 use noam148\imagemanager\models\ImageManager;
 use noam148\imagemanager\assets\ImageManagerInputAsset;
@@ -11,10 +13,19 @@ class ImageManagerInputWidget extends InputWidget{
 	//default ratio
 	public $aspectRatio = null; //option info: https://github.com/fengyuanchen/cropper/#aspectratio
 	public $cropViewMode = 1; //option info: https://github.com/fengyuanchen/cropper/#viewmode
-	public $showPreview = true; 
+	public $showPreview = true;
+	public $showDeletePickedImageConfirm = false;
 	
 	public function init(){
-		
+		parent::init();
+		//set language
+		if (!isset(Yii::$app->i18n->translations['imagemanager'])) {
+            Yii::$app->i18n->translations['imagemanager'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'sourceLanguage' => 'en',
+                'basePath' => '@noam148/imagemanager/messages'
+            ];
+        }
 	}
 	
 	/**
@@ -50,7 +61,7 @@ class ImageManagerInputWidget extends InputWidget{
         }
 		//end input group
 		$sHideClass = $ImageManager_id === null ? 'hide' : '';
-		$field .= "<a href='#' class='input-group-addon btn btn-primary delete-selected-image ".$sHideClass."' data-input-id='".$sFieldId."'><i class='glyphicon glyphicon-remove' aria-hidden='true'></i></a>";
+		$field .= "<a href='#' class='input-group-addon btn btn-primary delete-selected-image ".$sHideClass."' data-input-id='".$sFieldId."' data-show-delete-confirm='".($this->showDeletePickedImageConfirm ? "true" : "false")."'><i class='glyphicon glyphicon-remove' aria-hidden='true'></i></a>";
 		$field .= "<a href='#' class='input-group-addon btn btn-primary open-modal-imagemanager' data-aspect-ratio='".$this->aspectRatio."' data-crop-view-mode='".$this->cropViewMode."' data-input-id='".$sFieldId."'>";
 		$field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
 		$field .= "</a></div>";
@@ -85,5 +96,8 @@ class ImageManagerInputWidget extends InputWidget{
 		$sBaseUrl =  Url::to(['imagemanager/manager']);
 		//set base url
 		$view->registerJs("imageManagerInput.baseUrl = '".$sBaseUrl."';");
+		$view->registerJs("imageManagerInput.message = ".Json::encode([
+			'detachWarningMessage' => Yii::t('imagemanager','Are you sure you want to detach the image?'),
+		]).";");
     }
 }

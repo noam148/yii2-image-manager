@@ -1,6 +1,7 @@
 <?php
 return [
 	'Are you sure you want to delete this image?' => 'Are you sure you want to delete this image?',
+	'Are you sure you want to detach the image?' => 'Are you sure you want to detach the image?',
 	'Cancel' => 'Cancel',
 	'Created' => 'Created',
 	'Crop' => 'Crop',
