@@ -58,7 +58,7 @@ var imageManagerInput = {
 		//trigger change
 		$('#'+sFieldId).trigger("change");
 		//hide image
-		$('#'+sImagePreviewId).attr("src","").addClass("hide");	
+		$('#'+sImagePreviewId).attr("src","").parent().addClass("hide");	
 		//delete hide class
 		$(".delete-selected-image[data-input-id='"+inputId+"']").addClass("hide");
 	}

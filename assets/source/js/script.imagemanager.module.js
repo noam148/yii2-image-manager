@@ -51,7 +51,7 @@ var imageManagerModule = {
 		//set input data		
 		$('#'+sFieldId, window.parent.document).val(imageManagerModule.selectedImage.id);
 		$('#'+sFieldNameId, window.parent.document).val(imageManagerModule.selectedImage.fileName);
-		$('#'+sFieldImageId, window.parent.document).attr("src",imageManagerModule.selectedImage.image).removeClass("hide");
+		$('#'+sFieldImageId, window.parent.document).attr("src",imageManagerModule.selectedImage.image).parent().removeClass("hide");
 		//trigger change
 		parent.$('#'+sFieldId).trigger('change');
 		//show delete button
