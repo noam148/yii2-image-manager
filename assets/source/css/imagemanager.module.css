@@ -8,7 +8,7 @@
 #module-imagemanager > .row .col-overview .item-overview .item{ position: relative; overflow: hidden; width: 128px; height: 128px; cursor: pointer; }
 #module-imagemanager > .row .col-overview .item-overview .item.selected{ background: #00ac24; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail{ margin-bottom: 0; }
-#module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ max-height: 118px; }
+#module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ max-height: 118px; background: #dadada; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail .filename{ background-color: rgba(255, 255, 255, 0.9); position: absolute; bottom: 4px; left: 4px; right: 4px; max-height: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px; }
 /*edit column*/
 #module-imagemanager > .row .col-image-editor{ padding-left: 0; display: none; }
@@ -25,7 +25,7 @@
 /*details*/
 #module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
 #module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; }
+#module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; background: #dadada; }
 #module-imagemanager > .row .col-options .image-info .edit-buttons{ margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .details{}
 #module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }

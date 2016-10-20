@@ -3,4 +3,5 @@
 #modal-imagemanager iframe{ border: none; width: 100%; min-height: 500px; }
 
 .image-manager-input{}
-.image-manager-input .img-preview{ margin-top: 10px; max-width: 200px; max-height: 200px; }
+.image-manager-input .image-wrapper{ margin-top: 10px; border: 1px solid #ddd; border-radius: 4px; display: inline-block; padding: 4px; background: #FFF; }
+.image-manager-input .image-wrapper .img-preview{ background: #dadada; max-width: 200px; max-height: 200px; height: auto; line-height: 1.42857; }
