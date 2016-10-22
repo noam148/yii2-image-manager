@@ -38,7 +38,8 @@ var imageManagerInput = {
 			srcImageIdQueryString = "&image-id="+iImageId;
 		}
 		//create iframe url
-		var imageManagerUrl = imageManagerInput.baseUrl+"?view-mode=iframe&input-id="+inputId+"&aspect-ratio="+aspectRatio+"&crop-view-mode="+cropViewMode+srcImageIdQueryString;
+		var queryStringStartCharacter = ((imageManagerInput.baseUrl).indexOf('?') == -1) ? '?' : '&';
+		var imageManagerUrl = imageManagerInput.baseUrl+queryStringStartCharacter+"view-mode=iframe&input-id="+inputId+"&aspect-ratio="+aspectRatio+"&crop-view-mode="+cropViewMode+srcImageIdQueryString;
 		//set iframe path
 		$("#modal-imagemanager iframe").attr("src",imageManagerUrl);
 		//open modal
