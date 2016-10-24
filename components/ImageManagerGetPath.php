@@ -7,13 +7,24 @@ use himiklab\thumbnail\EasyThumbnailImage;
 use noam148\imagemanager\models\ImageManager;
 
 class ImageManagerGetPath extends Component {
+    /**
+     * @var null|string Folder path in which the images are stored
+     */
 	public $mediaPath = null;
-	public $baseUrlPublishedMedia = null;
-	
-	
-	/*
-	 * Get image
-	 */
+
+    /**
+     * @var null|string Base of the URL that is added to the image path
+     */
+    public $baseUrlPublishedMedia = null;
+
+    /**
+     * Get the path for the given ImageManager_id record
+     * @param int $ImageManager_id ImageManager record for which the path needs to be generated
+     * @param int $width Thumbnail image width
+     * @param int $height Thumbnail image height
+     * @param string $thumbnailMode Thumbnail mode
+     * @return null|string Full path is returned when image is found, null if no image could be found
+     */
 	public function getImagePath($ImageManager_id, $width = 400, $height = 400, $thumbnailMode = "outbound"){
 		//default return
 		$return = null;

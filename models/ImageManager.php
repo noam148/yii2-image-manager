@@ -19,7 +19,7 @@ use yii\behaviors\TimestampBehavior;
 class ImageManager extends \yii\db\ActiveRecord
 {
 	
-	/*
+	/**
      * Set Created date to now
      */
     public function behaviors()
@@ -69,8 +69,9 @@ class ImageManager extends \yii\db\ActiveRecord
         ];
     }
 	
-	/*
+	/**
 	 * Get image path private
+     * @return string|null If image file exists the path to the image, if file does not exists null
 	 */
 	public function getImagePathPrivate(){	
     	//set default return
@@ -87,9 +88,10 @@ class ImageManager extends \yii\db\ActiveRecord
     	return $return;
     }
 	
-	/*
+	/**
 	 * Get image data dimension/size
-	 */
+	 * @return array The image sizes
+     */
 	public function getImageDetails(){	
     	//set default return
     	$return = ['width'=>0, 'height'=>0, 'size'=> 0];

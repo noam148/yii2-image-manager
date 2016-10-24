@@ -260,9 +260,11 @@ class ManagerController extends Controller
 		return $return;  
     }
 
-	/*
-	 * Get full image
-	 */
+
+    /**
+     * Get full image
+     * @return mixed
+     */
 	public function actionGetOriginalImage(){
 		//disable Csrf
 		Yii::$app->controller->enableCsrfValidation = false;		
@@ -275,13 +277,12 @@ class ManagerController extends Controller
 		//set return
 		$return = \Yii::$app->imagemanager->getImagePath($model->id, $model->imageDetails['width'], $model->imageDetails['height'],"inset");
 		//return json encoded
-		return $return;  
+		return $return;
 	}
 	
     /**
      * Deletes an existing ImageManager model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
      * @return mixed
      */
     public function actionDelete()
