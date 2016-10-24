@@ -10,12 +10,29 @@ use noam148\imagemanager\models\ImageManager;
 use noam148\imagemanager\assets\ImageManagerInputAsset;
 
 class ImageManagerInputWidget extends InputWidget{
-	//default ratio
+    /**
+     * @var null|integer The aspect ratio the image needs to be cropped in (optional)
+     */
 	public $aspectRatio = null; //option info: https://github.com/fengyuanchen/cropper/#aspectratio
+
+    /**
+     * @var int Define the viewMode of the cropper
+     */
 	public $cropViewMode = 1; //option info: https://github.com/fengyuanchen/cropper/#viewmode
+
+    /**
+     * @var bool Show a preview of the image under the input
+     */
 	public $showPreview = true;
+
+    /**
+     * @var bool Show a confirmation message when de-linking a image from the input
+     */
 	public $showDeletePickedImageConfirm = false;
-	
+
+    /**
+     * @inheritdoc
+     */
 	public function init(){
 		parent::init();
 		//set language
@@ -29,7 +46,7 @@ class ImageManagerInputWidget extends InputWidget{
 	}
 	
 	/**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function run()
     {
