@@ -1,9 +1,10 @@
-var imageManagerModule = { 
+var imageManagerModule = {
 	//params for input selector
 	fieldId: null,
 	cropRatio: null,
 	cropViewMode: 1,
 	defaultImageId: null,
+	selectType: null, 
 	//current selected image
 	selectedImage: null,
 	//language
@@ -30,7 +31,7 @@ var imageManagerModule = {
 	//filter result
 	filterImageResult: function(searchTerm){
 		//set new url
-		var newUrl = window.updateQueryStringParameter(window.location.href, "ImageManagerSearch[globalSearch]", searchTerm);
+		var newUrl = window.queryStringParameter.set(window.location.href, "ImageManagerSearch[globalSearch]", searchTerm);
 		//set pjax
 		$.pjax({url: newUrl, container: "#pjax-mediamanager", push: false, replace: false, timeout: 5000, scrollTo:false});
 	},	
@@ -44,20 +45,64 @@ var imageManagerModule = {
 	},
 	//pick the selected image
 	pickImage: function(){
-		//get id data
-		var sFieldId = imageManagerModule.fieldId;
-		var sFieldNameId = sFieldId+"_name";
-		var sFieldImageId = sFieldId+"_image";
-		//set input data		
-		$('#'+sFieldId, window.parent.document).val(imageManagerModule.selectedImage.id);
-		$('#'+sFieldNameId, window.parent.document).val(imageManagerModule.selectedImage.fileName);
-		$('#'+sFieldImageId, window.parent.document).attr("src",imageManagerModule.selectedImage.image).parent().removeClass("hide");
-		//trigger change
-		parent.$('#'+sFieldId).trigger('change');
-		//show delete button
-		$(".delete-selected-image[data-input-id='"+sFieldId+"']", window.parent.document).removeClass("hide");
-		//close the modal
-		window.parent.imageManagerInput.closeModal();
+		
+		switch(imageManagerModule.selectType){
+			//default widget selector
+			case "input":
+				//get id data
+				var sFieldId = imageManagerModule.fieldId;
+				var sFieldNameId = sFieldId+"_name";
+				var sFieldImageId = sFieldId+"_image";
+				//set input data		
+				$('#'+sFieldId, window.parent.document).val(imageManagerModule.selectedImage.id);
+				$('#'+sFieldNameId, window.parent.document).val(imageManagerModule.selectedImage.fileName);
+				$('#'+sFieldImageId, window.parent.document).attr("src",imageManagerModule.selectedImage.image).parent().removeClass("hide");
+				//trigger change
+				parent.$('#'+sFieldId).trigger('change');
+				//show delete button
+				$(".delete-selected-image[data-input-id='"+sFieldId+"']", window.parent.document).removeClass("hide");
+				//close the modal
+				window.parent.imageManagerInput.closeModal();
+				break;
+			//CKEditor selector
+			case "ckeditor":
+			//TinyMCE Selector
+			case "tinymce":
+				//check if isset image
+				if(imageManagerModule.selectedImage !== null){
+					//call action by ajax
+					$.ajax({
+						url: imageManagerModule.baseUrl+"/get-original-image",
+						type: "POST",
+						data: {
+							ImageManager_id: imageManagerModule.selectedImage.id,
+							_csrf: $('meta[name=csrf-token]').prop('content')
+						},
+						dataType: "json",
+						success: function (responseData, textStatus, jqXHR) {
+							//set attributes for each selector
+							if(imageManagerModule.selectType == "ckeditor"){
+								var sField = window.queryStringParameter.get(window.location.href, "CKEditorFuncNum");
+								window.top.opener.CKEDITOR.tools.callFunction(sField, responseData);
+								window.self.close();
+							}else if(imageManagerModule.selectType == "tinymce"){
+								var sField = window.queryStringParameter.get(window.location.href, "tag_name");
+								window.opener.document.getElementById(sField).value = responseData;
+								window.close();
+								window.opener.focus();								
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							alert("Error: can't get item");
+						}
+					});
+				}else{
+					alert("Error: image can't picked");
+				}
+				break;
+		}
+		
+		
 	},
 	//delete the selected image
 	deleteSelectedImage: function(){
@@ -267,16 +312,23 @@ $(document).ready(function () {
 /*
  * return new get param to url
  */
-window.updateQueryStringParameter = function(uri, key, value){
-	//replace brackets 
-	var keyReplace = key.replace("[]", "").replace(/\[/g, "%5B").replace(/\]/g, "%5D");
-	//replace data
-	var re = new RegExp("([?&])" + keyReplace + "=.*?(&|$)", "i");
-	var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-	if (uri.match(re)) {
-		return uri.replace(re, '$1' + keyReplace + "=" + value + '$2');
-	}
-	else {
-		return uri + separator + keyReplace + "=" + value;
+window.queryStringParameter = {
+	get: function(uri, key){
+		var reParam = new RegExp('(?:[\?&]|&amp;)' + key + '=([^&]+)', 'i');
+		var match = uri.match(reParam);
+		return (match && match.length > 1) ? match[1] : null;
+	},
+	set: function(uri, key, value){
+		//replace brackets 
+		var keyReplace = key.replace("[]", "").replace(/\[/g, "%5B").replace(/\]/g, "%5D");
+		//replace data
+		var re = new RegExp("([?&])" + keyReplace + "=.*?(&|$)", "i");
+		var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+		if (uri.match(re)) {
+			return uri.replace(re, '$1' + keyReplace + "=" + value + '$2');
+		}
+		else {
+			return uri + separator + keyReplace + "=" + value;
+		}
 	}
 };

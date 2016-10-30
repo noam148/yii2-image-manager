@@ -8,7 +8,7 @@ use kartik\file\FileInput;
 $this->title = "Image manager";
 
 ?>
-<div id="module-imagemanager" class="container-fluid">
+<div id="module-imagemanager" class="container-fluid <?=$selectType?>">
 	<div class="row">
 		<div class="col-xs-6 col-sm-10 col-image-editor">
 			<div class="image-cropper">
@@ -74,7 +74,6 @@ $this->title = "Image manager";
 					"fileuploaderror" => "function(event, data) { $('.msg-invalid-file-extension').removeClass('hide'); }",
 				],
 			])?>
-			
 		
 			<div class="image-info hide">
 				<div class="thumbnail">
@@ -90,7 +89,7 @@ $this->title = "Image manager";
 					<div class="fileName"></div>
 					<div class="created"></div>
 					<div class="fileSize"></div>
-					<div class="dimensions"><span class="dimension-width"></span> × <span class="dimension-height"></span></div>
+					<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>
 					<a href="#" class="text-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></a>
 				</div>
 				<?php if($viewMode === "iframe"): ?>

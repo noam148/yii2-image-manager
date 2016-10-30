@@ -85,5 +85,42 @@ If you want to use a image:
 \Yii::$app->imagemanager->getImagePath($ImageManager_id, $width, $height,$thumbnailMode)
 ```
 
+Support CKEditor & TinyMce
+-----
+For using the filebrowser in CKEditor add the filebrowserImageBrowseUrl to the clientOptions of the CKEditor widget. I test it only for the CKEditor from 2amigOS but it need to work on other CKEditor widgets.
+
+```php
+use dosamigos\ckeditor\CKEditor;
+
+ echo $form->field($model, 'text')->widget(CKEditor::className(), [
+	'options' => ['rows' => 6],
+	'preset' => 'basic',
+	'clientOptions' => [
+		'filebrowserImageBrowseUrl' => yii\helpers\Url::to(['imagemanager/manager', 'view-mode'=>'iframe', 'select-type'=>'ckeditor']),
+	]
+]);
+```
+
+For using the filebrowser in TinyMce add the file_browser_callback to the clientOptions of the TinyMce widget. I test it only for the TinyMce from 2amigOS but it need to work on other TinyMce widgets. (don't forget add 'image' to your 'plugins' array)
+
+```php
+use dosamigos\tinymce\TinyMce;
+
+echo $form->field($model, 'text')->widget(TinyMce::className(), [
+	'options' => ['rows' => 6],
+	'language' => 'nl',
+	'clientOptions' => [
+		'file_browser_callback' => new yii\web\JsExpression("function(field_name, url, type, win) {
+			window.open('".yii\helpers\Url::to(['imagemanager/manager', 'view-mode'=>'iframe', 'select-type'=>'tinymce'])."&tag_name='+field_name,'','width=800,height=540 ,toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no');
+		}"),
+		'plugins' => [
+			"advlist autolink lists link charmap print preview anchor",
+			"searchreplace visualblocks code fullscreen",
+			"insertdatetime media table contextmenu paste image"
+		],
+		'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+	]
+]);
+```	
 
 **If you got questions, tips or feedback? Please, let me know!**

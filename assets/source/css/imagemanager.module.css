@@ -1,6 +1,8 @@
 /*CSS for module*/
 #module-imagemanager{ padding-left: 0; padding-right: 0; }
 #module-imagemanager > .row{ margin: 0; }
+#module-imagemanager.tinymce,
+#module-imagemanager.ckeditor{ padding: 15px; }
 
 /*overview*/
 #module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; border-right: 1px solid #ddd; height: 100%; overflow: auto; }
