@@ -16,7 +16,7 @@ var imageManagerInput = {
 				sModalHtml += '<div class="modal-dialog modal-lg">';
 					sModalHtml += '<div class="modal-content">';
 						sModalHtml += '<div class="modal-header">';
-							sModalHtml += '<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã—</button>';
+							sModalHtml += '<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>';
 							sModalHtml += '<h4>Image manager</h4>';
 						sModalHtml += '</div>';
 						sModalHtml += '<div class="modal-body">';
