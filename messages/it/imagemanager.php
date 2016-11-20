@@ -5,6 +5,7 @@ return [
 	'Cancel' => 'Cancellre',
 	'Created' => 'Creato',
 	'Crop' => 'Tagliare a formato',
+	'Crop and select' => 'Tagliare a formato e selezionare',
 	'Delete' => 'Cancellare',
 	'File hash' => 'File hash',
 	'File name' => 'Nome del file',

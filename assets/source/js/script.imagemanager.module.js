@@ -45,7 +45,7 @@ var imageManagerModule = {
 	},
 	//pick the selected image
 	pickImage: function(){
-		
+		//switch between select type
 		switch(imageManagerModule.selectType){
 			//default widget selector
 			case "input":
@@ -145,7 +145,9 @@ var imageManagerModule = {
 		}
 	},
 	//get image details
-	getDetails: function(id){
+	getDetails: function(id, pickAfterGetDetails){
+		//set propertie if not set
+		pickAfterGetDetails = pickAfterGetDetails !== undefined ? pickAfterGetDetails : false;
 		//call action by ajax
 		$.ajax({
 			url: imageManagerModule.baseUrl+"/view",
@@ -158,15 +160,22 @@ var imageManagerModule = {
 			success: function (responseData, textStatus, jqXHR) {
 				//set imageManagerModule.selectedImage property
 				imageManagerModule.selectedImage = responseData; 
-				//set text elements
-				$("#module-imagemanager .image-info .fileName").text(responseData.fileName).attr("title",responseData.fileName);
-				$("#module-imagemanager .image-info .created").text(responseData.created);
-				$("#module-imagemanager .image-info .fileSize").text(responseData.fileSize);
-				$("#module-imagemanager .image-info .dimensions .dimension-width").text(responseData.dimensionWidth);
-				$("#module-imagemanager .image-info .dimensions .dimension-height").text(responseData.dimensionHeight);
-				$("#module-imagemanager .image-info .thumbnail").html("<img src='"+responseData.image+"' alt='"+responseData.fileName+"'/>");
-				//remove hide class
-				$("#module-imagemanager .image-info").removeClass("hide");
+				
+				//if need to pick image?
+				if(pickAfterGetDetails){
+					imageManagerModule.pickImage();
+				//else set data
+				}else{
+					//set text elements
+					$("#module-imagemanager .image-info .fileName").text(responseData.fileName).attr("title",responseData.fileName);
+					$("#module-imagemanager .image-info .created").text(responseData.created);
+					$("#module-imagemanager .image-info .fileSize").text(responseData.fileSize);
+					$("#module-imagemanager .image-info .dimensions .dimension-width").text(responseData.dimensionWidth);
+					$("#module-imagemanager .image-info .dimensions .dimension-height").text(responseData.dimensionHeight);
+					$("#module-imagemanager .image-info .thumbnail").html("<img src='"+responseData.image+"' alt='"+responseData.fileName+"'/>");
+					//remove hide class
+					$("#module-imagemanager .image-info").removeClass("hide");
+				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				alert("Error: can't get ''data''");
@@ -230,7 +239,9 @@ var imageManagerModule = {
 			}
 		},
 		//apply crop
-		applyCrop: function(){
+		applyCrop: function(pickAfterCrop){
+			//set propertie if not set
+			pickAfterCrop = pickAfterCrop !== undefined ? pickAfterCrop : false;
 			//check if isset image
 			if(imageManagerModule.selectedImage !== null){
 				//set image in cropper
@@ -248,10 +259,16 @@ var imageManagerModule = {
 					success: function (responseData, textStatus, jqXHR) {
 						//set cropped image
 						if(responseData !== null){
-							//reload pjax container
-							$.pjax.reload('#pjax-mediamanager', {push: false, replace: false, timeout: 5000, scrollTo: false});
-							//set new image
-							imageManagerModule.selectImage(responseData);
+							//if pickAfterCrop is true? select directly else
+							if(pickAfterCrop){
+								imageManagerModule.getDetails(responseData, true);
+							//else select the image only
+							}else{
+								//set new image
+								imageManagerModule.selectImage(responseData);
+								//reload pjax container
+								$.pjax.reload('#pjax-mediamanager', {push: false, replace: false, timeout: 5000, scrollTo: false});
+							}
 						}
 						//close editor
 						imageManagerModule.editor.close();
@@ -295,6 +312,11 @@ $(document).ready(function () {
 	//on click apply crop
 	$(document).on("click", "#module-imagemanager .image-cropper .apply-crop", function (){
 		imageManagerModule.editor.applyCrop();	
+		return false;
+	});
+	//on click apply crop
+	$(document).on("click", "#module-imagemanager .image-cropper .apply-crop-select", function (){
+		imageManagerModule.editor.applyCrop(true);	
 		return false;
 	});
 	//on click cancel crop

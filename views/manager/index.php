@@ -20,6 +20,12 @@ $this->title = "Image manager";
 						<i class="fa fa-crop"></i>
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
 					</a>
+					<?php if($viewMode === "iframe"): ?>
+					<a href="#" class="btn btn-primary apply-crop-select">
+						<i class="fa fa-crop"></i>
+						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop and select')?></span>
+					</a>
+					<?php endif; ?>
 					<a href="#" class="btn btn-default cancel-crop">
 						<i class="fa fa-undo"></i>
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>

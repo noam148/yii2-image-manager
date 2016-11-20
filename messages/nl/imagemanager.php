@@ -5,6 +5,7 @@ return [
 	'Cancel' => 'Annuleer',
 	'Created' => 'Aangemaakt',
 	'Crop' => 'Bijsnijden',
+	'Crop and select' => 'Bijsnijden en selecteren',
 	'Delete' => 'Verwijderen',
 	'File hash' => 'Bestand hash',
     'File name' => 'Bestandsnaam',
