@@ -286,6 +286,13 @@ class ManagerController extends Controller {
 		$return = ['delete' => false];
 		//set response header
 		Yii::$app->getResponse()->format = Response::FORMAT_JSON;
+
+        // Check if the user is allowed to delete the image
+        if (! Yii::$app->controller->module->removeImageAllowed) {
+            // Return the response array to prevent from the action being executed any further
+            return $return;
+        }
+
 		//get post
 		$ImageManager_id = Yii::$app->request->post("ImageManager_id");
 		//get details

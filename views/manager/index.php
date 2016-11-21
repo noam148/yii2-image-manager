@@ -96,7 +96,13 @@ $this->title = "Image manager";
 					<div class="created"></div>
 					<div class="fileSize"></div>
 					<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>
-					<a href="#" class="text-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></a>
+					<?php
+						if (Yii::$app->controller->module->removeImageAllowed):
+					?>
+						<a href="#" class="text-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></a>
+					<?php
+						endif;
+					?>
 				</div>
 				<?php if($viewMode === "iframe"): ?>
 				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a> 
