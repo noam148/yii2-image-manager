@@ -106,12 +106,19 @@ class ManagerController extends Controller {
 	 * @return mixed
 	 */
 	public function actionUpload() {
+        //set response header
+        Yii::$app->getResponse()->format = Response::FORMAT_JSON;
+
+        // Check if the user is allowed to upload the image
+        if (Yii::$app->controller->module->canUploadImage == false) {
+            // Return the response array to prevent from the action being executed any further
+            return [];
+        }
+
 		//disable Csrf
 		Yii::$app->controller->enableCsrfValidation = false;
 		//return default
 		$return = $_FILES;
-		//set response header
-		Yii::$app->getResponse()->format = Response::FORMAT_JSON;
 		//set media path
 		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
 		//create the folder
@@ -288,7 +295,7 @@ class ManagerController extends Controller {
 		Yii::$app->getResponse()->format = Response::FORMAT_JSON;
 
         // Check if the user is allowed to delete the image
-        if (! Yii::$app->controller->module->removeImageAllowed) {
+        if (Yii::$app->controller->module->canRemoveImage == false) {
             // Return the response array to prevent from the action being executed any further
             return $return;
         }

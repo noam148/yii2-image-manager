@@ -52,7 +52,11 @@ $this->title = "Image manager";
 			<div class="form-group">
 				<?=Html::textInput('input-mediamanager-search', null, ['id'=>'input-mediamanager-search', 'class'=>'form-control', 'placeholder'=>Yii::t('imagemanager','Search').'...'])?>
 			</div>
-			
+
+			<?php
+				if (Yii::$app->controller->module->canUploadImage):
+			?>
+
 			<?=FileInput::widget([
 				'name' => 'imagemanagerFiles[]',
 				'id' => 'imagemanager-files',
@@ -79,8 +83,12 @@ $this->title = "Image manager";
 					}",
 					"fileuploaderror" => "function(event, data) { $('.msg-invalid-file-extension').removeClass('hide'); }",
 				],
-			])?>
-		
+			]) ?>
+
+			<?php
+				endif;
+			?>
+
 			<div class="image-info hide">
 				<div class="thumbnail">
 					<img src="#">
@@ -97,9 +105,9 @@ $this->title = "Image manager";
 					<div class="fileSize"></div>
 					<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>
 					<?php
-						if (Yii::$app->controller->module->removeImageAllowed):
+						if (Yii::$app->controller->module->canRemoveImage):
 					?>
-						<a href="#" class="text-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></a>
+						<a href="#" class="btn btn-xs btn-danger delete-image-item" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <?=Yii::t('imagemanager','Delete')?></a>
 					<?php
 						endif;
 					?>

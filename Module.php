@@ -23,11 +23,18 @@ class Module extends \yii\base\Module
 	public $assetPublishedUrl;
 
     /**
-     * @var bool|mixed Variable that defines if the delete action will be available
+     * @var bool|callable Variable that defines if the delete action will be available
      * This variable default to true, to enable removal if image
      * It is also possible to give a callable function, in which case the function will be executed
      */
-    public $removeImageAllowed = true;
+    public $canRemoveImage = true;
+
+    /**
+     * @var bool|callable Variable that defines if the upload action will be available
+     * This variable defaults to true, to enable uploading by default
+     * It is also possible to give a callable function, in which case the function will be executed
+     */
+    public $canUploadImage = true;
 
     /**
      * @inheritdoc
@@ -52,9 +59,14 @@ class Module extends \yii\base\Module
 		//set asset path
 		$this->assetPublishedUrl = (new AssetManager)->getPublishedUrl("@vendor/noam148/yii2-image-manager/assets/source");
 
-        // Check if the removeImageAllowed variable is callable
-        if (is_callable($this->removeImageAllowed)) {
-            $this->removeImageAllowed = call_user_func($this->removeImageAllowed);
+        // Check if the canRemoveImage variable is callable
+        if (is_callable($this->canRemoveImage)) {
+            $this->canRemoveImage = call_user_func($this->canRemoveImage);
+        }
+
+        // Check if the canUploadImage variable is callable
+        if (is_callable($this->canUploadImage)) {
+            $this->canUploadImage = call_user_func($this->canUploadImage);
         }
 
         // Check if the variable configuration is correct in order for the module to function
@@ -113,10 +125,19 @@ class Module extends \yii\base\Module
         }
 	}
 
+    /**
+     * Check if the module variables have the content that is expected
+     * @throws InvalidConfigException
+     */
 	private function _checkVariableConfiguration() {
-        // Check if the removeImageAllowed is boolean
-        if (! is_bool($this->removeImageAllowed)) {
+        // Check if the canRemoveImage is boolean
+        if (! is_bool($this->canRemoveImage)) {
             throw new InvalidConfigException('$removeImageAllowed variable only supports a boolean value, if you have a custom function you must return a boolean');
+        }
+
+        // Check if the canUploadImage is boolean
+        if (! is_bool($this->canUploadImage)) {
+            throw new InvalidConfigException('$canUploadImage variable only supports a boolean value, if you have a custom function you must return a boolean');
         }
     }
 }
