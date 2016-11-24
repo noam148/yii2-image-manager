@@ -92,11 +92,11 @@ class ManagerController extends Controller {
 
 		//render template
 		return $this->render(
-			'index', [
-			'searchModel' => $searchModel,
-			'dataProvider' => $dataProvider,
-			'viewMode' => $viewMode,
-			'selectType' => $selectType,
+						'index', [
+					'searchModel' => $searchModel,
+					'dataProvider' => $dataProvider,
+					'viewMode' => $viewMode,
+					'selectType' => $selectType,
 		]);
 	}
 
@@ -126,10 +126,10 @@ class ManagerController extends Controller {
 				$sFileExtension = pathinfo($sFileName, PATHINFO_EXTENSION);
 				$iErrorCode = $_FILES['imagemanagerFiles']['error'][$key];
 				//if uploaded file has no error code  than continue;
-				if ($iErrorCode == 0) {
+				if ($iErrorCode == 0) { 
 					//create a file record
 					$model = new ImageManager();
-					$model->fileName = str_replace("_","-",$sFileName);
+					$model->fileName = str_replace("_", "-", $sFileName);
 					$model->fileHash = Yii::$app->getSecurity()->generateRandomString(32);
 					//if file is saved add record
 					if ($model->save()) {

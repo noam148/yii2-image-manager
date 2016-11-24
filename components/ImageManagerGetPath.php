@@ -5,7 +5,7 @@ namespace noam148\imagemanager\components;
 use yii\base\Component;
 use noam148\imagemanager\models\ImageManager;
 
-class ImageManagerGetPath extends Component {
+class ImageManagerGetPath extends Component { 
 
 	/**
 	 * @var null|string $mediaPath Folder path in which the images are stored

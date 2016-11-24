@@ -15,98 +15,93 @@ use yii\behaviors\TimestampBehavior;
  * @property string $created
  * @property string $modified
  */
-class ImageManager extends \yii\db\ActiveRecord
-{
-	
+class ImageManager extends \yii\db\ActiveRecord { 
+
 	/**
-     * Set Created date to now
-     */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created',
-                'updatedAtAttribute' => 'modified',
-                'value' => new Expression('NOW()'),
-            ],
-        ];
-    }
-	
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'ImageManager';
-    }
+	 * Set Created date to now
+	 */
+	public function behaviors() {
+		return [
+			[
+				'class' => TimestampBehavior::className(),
+				'createdAtAttribute' => 'created',
+				'updatedAtAttribute' => 'modified',
+				'value' => new Expression('NOW()'),
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['fileName', 'fileHash'], 'required'],
-            [['created', 'modified'], 'safe'],
-            [['fileName'], 'string', 'max' => 128],
-            [['fileHash'], 'string', 'max' => 32],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName() {
+		return 'ImageManager';
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => Yii::t('imagemanager', 'ID'),
-            'fileName' => Yii::t('imagemanager', 'File Name'),
-            'fileHash' => Yii::t('imagemanager', 'File Hash'),
-            'created' => Yii::t('imagemanager', 'Created'),
-            'modified' => Yii::t('imagemanager', 'Modified'),
-        ];
-    }
-	
+	/**
+	 * @inheritdoc
+	 */
+	public function rules() {
+		return [
+			[['fileName', 'fileHash'], 'required'],
+			[['created', 'modified'], 'safe'],
+			[['fileName'], 'string', 'max' => 128],
+			[['fileHash'], 'string', 'max' => 32],
+		];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels() {
+		return [
+			'id' => Yii::t('imagemanager', 'ID'),
+			'fileName' => Yii::t('imagemanager', 'File Name'),
+			'fileHash' => Yii::t('imagemanager', 'File Hash'),
+			'created' => Yii::t('imagemanager', 'Created'),
+			'modified' => Yii::t('imagemanager', 'Modified'),
+		];
+	}
+
 	/**
 	 * Get image path private
-     * @return string|null If image file exists the path to the image, if file does not exists null
+	 * @return string|null If image file exists the path to the image, if file does not exists null
 	 */
-	public function getImagePathPrivate(){	
-    	//set default return
-    	$return = null;
+	public function getImagePathPrivate() {
+		//set default return
+		$return = null;
 		//set media path
 		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
 		$sFileExtension = pathinfo($this->fileName, PATHINFO_EXTENSION);
-    	//get image file path
-    	$sImageFilePath = $sMediaPath.'/'.$this->id.'_'.$this->fileHash.'.'.$sFileExtension;
-    	//check file exists
-    	if(file_exists($sImageFilePath)){
-    		$return = $sImageFilePath;
-    	}
-    	return $return;
-    }
-	
+		//get image file path
+		$sImageFilePath = $sMediaPath . '/' . $this->id . '_' . $this->fileHash . '.' . $sFileExtension;
+		//check file exists
+		if (file_exists($sImageFilePath)) {
+			$return = $sImageFilePath;
+		}
+		return $return;
+	}
+
 	/**
 	 * Get image data dimension/size
 	 * @return array The image sizes
-     */
-	public function getImageDetails(){	
-    	//set default return
-    	$return = ['width'=>0, 'height'=>0, 'size'=> 0];
+	 */
+	public function getImageDetails() {
+		//set default return
+		$return = ['width' => 0, 'height' => 0, 'size' => 0];
 		//set media path
 		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
 		$sFileExtension = pathinfo($this->fileName, PATHINFO_EXTENSION);
-    	//get image file path
-    	$sImageFilePath = $sMediaPath.'/'.$this->id.'_'.$this->fileHash.'.'.$sFileExtension;
-    	//check file exists
-    	if(file_exists($sImageFilePath)){
-    		$aImageDimension = getimagesize($sImageFilePath);
+		//get image file path
+		$sImageFilePath = $sMediaPath . '/' . $this->id . '_' . $this->fileHash . '.' . $sFileExtension;
+		//check file exists
+		if (file_exists($sImageFilePath)) {
+			$aImageDimension = getimagesize($sImageFilePath);
 			$return['width'] = isset($aImageDimension[0]) ? $aImageDimension[0] : 0;
 			$return['height'] = isset($aImageDimension[1]) ? $aImageDimension[1] : 0;
 			$return['size'] = Yii::$app->formatter->asShortSize(filesize($sImageFilePath), 2);
-    	}
-    	return $return;
-    }
-	
+		}
+		return $return;
+	}
+
 }
