@@ -86,10 +86,6 @@ class Module extends \yii\base\Module
 		if (!class_exists('kartik\file\FileInput')) {
             throw new UnknownClassException("Can't find: kartik\\file\FileInput. Install \"kartik-v/yii2-widget-fileinput\": \"@dev\"");
         }
-		//check EasyThumbnail is installed
-		if (!class_exists('himiklab\thumbnail\EasyThumbnail')) {
-            throw new UnknownClassException("Can't find: himiklab\\thumbnail\EasyThumbnail. Install \"himiklab/yii2-easy-thumbnail-image-helper\" : \"*\"");
-        }
 		//check Yii imagine is installed
 		if (!class_exists('yii\imagine\Image')) {
             throw new UnknownClassException("Can't find: yii\imagine\Image. Install \"yiisoft/yii2-imagine\": \"~2.0.0\"");

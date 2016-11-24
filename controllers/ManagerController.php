@@ -129,15 +129,15 @@ class ManagerController extends Controller {
 				if ($iErrorCode == 0) {
 					//create a file record
 					$model = new ImageManager();
-					$model->fileName = $sFileName;
+					$model->fileName = str_replace("_","-",$sFileName);
 					$model->fileHash = Yii::$app->getSecurity()->generateRandomString(32);
 					//if file is saved add record
 					if ($model->save()) {
 						//move file to dir
-						$sFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
+						$sSaveFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
 						//move_uploaded_file($sTempFile, $sMediaPath."/".$sFileName);
 						//save with Imagine class
-						Image::getImagine()->open($sTempFile)->save($sMediaPath . "/" . $sFileName);
+						Image::getImagine()->open($sTempFile)->save($sMediaPath . "/" . $sSaveFileName);
 					}
 				}
 			}

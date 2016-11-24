@@ -4,7 +4,6 @@ namespace noam148\imagemanager\models;
 
 use Yii;
 use yii\db\Expression;
-use yii\helpers\Url;
 use yii\behaviors\TimestampBehavior;
 
 /**

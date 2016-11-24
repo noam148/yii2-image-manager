@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "himiklab/yii2-easy-thumbnail-image-helper" : "*",
+        "yiisoft/yii2": "*",
+		"noam148/yii2-image-resize" : "dev-master",
 		"kartik-v/yii2-widget-fileinput": "@dev"
     },
     "autoload": {
