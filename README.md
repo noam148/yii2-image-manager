@@ -49,6 +49,11 @@ and in `modules` section, for example:
 'modules' => [
 	'imagemanager' => [
 		'class' => 'noam148\imagemanager\Module',
+		//set accces rules ()
+		'canUploadImage' => true,
+		'canRemoveImage' => function(){
+			return true;
+		},
 		//add css files (to use in media manage selector iframe)
 		'cssFiles' => [
 			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
