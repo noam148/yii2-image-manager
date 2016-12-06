@@ -62,6 +62,16 @@ and in `modules` section, for example:
 ],
 ```
 
+Installation tags (optional) DEVELOPMENT/DOESN'T WORK JET
+---------------------------------------------------------
+If you want to add tags to you images it is possible to categorize them by tags
+
+* Run the migrate to create the ImageManagerTag table and the ImageManager_ImageManagerTag relation table
+```
+yii migrate --migrationPath=@noam148/imagemanager/migrations/tag
+```
+
+
 Usage
 -----
 To reach the imagemanager module go to:
