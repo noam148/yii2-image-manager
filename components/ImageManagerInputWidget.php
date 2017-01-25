@@ -110,7 +110,7 @@ class ImageManagerInputWidget extends InputWidget{
         ImageManagerInputAsset::register($view);
 		
 		//set baseUrl from image manager
-		$sBaseUrl =  Url::to(['imagemanager/manager']);
+		$sBaseUrl =  Url::to(['/imagemanager/manager']);
 		//set base url
 		$view->registerJs("imageManagerInput.baseUrl = '".$sBaseUrl."';");
 		$view->registerJs("imageManagerInput.message = ".Json::encode([
