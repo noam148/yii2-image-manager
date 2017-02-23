@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use noam148\imagemanager\models\ImageManager;
+use noam148\imagemanager\Module;
 
 /**
  * ImageManagerSearch represents the model behind the search form about `common\modules\imagemanager\models\ImageManager`.
@@ -60,6 +61,15 @@ class ImageManagerSearch extends ImageManager
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+
+        // Get the module instance
+        $module = Module::getInstance();
+
+        if ($module->setBlameableBehavior) {
+            if (! Yii::$app->user->isGuest) {
+                $query->andWhere(['createdBy' => Yii::$app->user->id]);
+            }
         }
 
         $query->orFilterWhere(['like', 'fileName', $this->globalSearch])

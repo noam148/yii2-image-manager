@@ -2,9 +2,11 @@
 
 namespace noam148\imagemanager\models;
 
+use noam148\imagemanager\Module;
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "ImageManager".
@@ -21,14 +23,28 @@ class ImageManager extends \yii\db\ActiveRecord {
 	 * Set Created date to now
 	 */
 	public function behaviors() {
-		return [
-			[
-				'class' => TimestampBehavior::className(),
-				'createdAtAttribute' => 'created',
-				'updatedAtAttribute' => 'modified',
-				'value' => new Expression('NOW()'),
-			],
-		];
+	    $aBehaviors = [];
+
+	    // Add the time stamp behavior
+        $aBehaviors[] = [
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'created',
+            'updatedAtAttribute' => 'modified',
+            'value' => new Expression('NOW()'),
+        ];
+
+        // Get the module instance
+        $module = Module::getInstance();
+
+        if ($module->setBlameableBehavior) {
+            $aBehaviors[] = [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'createdBy',
+                'updatedByAttribute' => 'modifiedBy',
+            ];
+        }
+
+		return $aBehaviors;
 	}
 
 	/**
