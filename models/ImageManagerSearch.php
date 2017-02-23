@@ -67,9 +67,7 @@ class ImageManagerSearch extends ImageManager
         $module = Module::getInstance();
 
         if ($module->setBlameableBehavior) {
-            if (! Yii::$app->user->isGuest) {
-                $query->andWhere(['createdBy' => Yii::$app->user->id]);
-            }
+            $query->andWhere(['createdBy' => Yii::$app->user->id]);
         }
 
         $query->orFilterWhere(['like', 'fileName', $this->globalSearch])

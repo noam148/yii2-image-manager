@@ -16,6 +16,8 @@ use yii\behaviors\BlameableBehavior;
  * @property string $fileHash
  * @property string $created
  * @property string $modified
+ * @property string $createdBy
+ * @property string $modifiedBy
  */
 class ImageManager extends \yii\db\ActiveRecord { 
 
@@ -76,6 +78,8 @@ class ImageManager extends \yii\db\ActiveRecord {
 			'fileHash' => Yii::t('imagemanager', 'File Hash'),
 			'created' => Yii::t('imagemanager', 'Created'),
 			'modified' => Yii::t('imagemanager', 'Modified'),
+			'createdBy' => Yii::t('imagemanager', 'Created by'),
+			'modifiedBy' => Yii::t('imagemanager', 'Modified by'),
 		];
 	}
 
