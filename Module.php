@@ -143,6 +143,15 @@ class Module extends \yii\base\Module {
 		// Check if the setBlamableBehavior is boolean
         if (! is_bool($this->setBlameableBehavior))
             throw new InvalidConfigException('$setBlameableBehavior only supports a boolean value, if you have a customer function make sure that you return a boolean');
+
+		// Check if the blameable behavior is set to true
+        if ($this->setBlameableBehavior) {
+            // Get the migration record
+            $mRecordMigrationRun = Yii::$app->db->createCommand('SELECT * FROM `migration` WHERE `version` = \'m170223_113221_addBlameableBehavior\'')->queryOne();
+            if ($mRecordMigrationRun === false) {
+                throw new InvalidConfigException('Image Manager: You have not run the latest migration, see the documentation how to do this.');
+            }
+        }
 	}
 
 }

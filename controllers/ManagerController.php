@@ -306,17 +306,6 @@ class ManagerController extends Controller {
 		//get details
 		$model = $this->findModel($ImageManager_id);
 
-        // Get the module instance
-        $module = Module::getInstance();
-
-        // Check if the model belongs to this user
-        if ($module->setBlameableBehavior) {
-            // Check if the user and record ID match
-            if (Yii::$app->user->id != $model->createdBy) {
-                return $return;
-            }
-        }
-
 		//set some data
 		$sFileExtension = pathinfo($model->fileName, PATHINFO_EXTENSION);
 		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
@@ -341,6 +330,18 @@ class ManagerController extends Controller {
 	 */
 	protected function findModel($id) {
 		if (($model = ImageManager::findOne($id)) !== null) {
+		    /* @var $model ImageManager */
+            // Get the module instance
+            $module = Module::getInstance();
+
+            // Check if the model belongs to this user
+            if ($module->setBlameableBehavior) {
+                // Check if the user and record ID match
+                if (Yii::$app->user->id != $model->createdBy) {
+                    return null;
+                }
+            }
+
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');
