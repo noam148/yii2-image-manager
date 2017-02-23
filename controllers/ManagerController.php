@@ -16,6 +16,7 @@ use yii\imagine\Image;
 use Imagine\Image\Box;
 use Imagine\Image\Color;
 use Imagine\Image\Point;
+use noam148\imagemanager\Module;
 
 /**
  * Manager controller for the `imagemanager` module
@@ -304,6 +305,7 @@ class ManagerController extends Controller {
 		$ImageManager_id = Yii::$app->request->post("ImageManager_id");
 		//get details
 		$model = $this->findModel($ImageManager_id);
+
 		//set some data
 		$sFileExtension = pathinfo($model->fileName, PATHINFO_EXTENSION);
 		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
@@ -328,9 +330,21 @@ class ManagerController extends Controller {
 	 */
 	protected function findModel($id) {
 		if (($model = ImageManager::findOne($id)) !== null) {
+		    /* @var $model ImageManager */
+            // Get the module instance
+            $module = Module::getInstance();
+
+            // Check if the model belongs to this user
+            if ($module->setBlameableBehavior) {
+                // Check if the user and record ID match
+                if (Yii::$app->user->id != $model->createdBy) {
+                    throw new NotFoundHttpException(Yii::t('imagemanager', 'The requested image does not exist.'));
+                }
+            }
+
 			return $model;
 		} else {
-			throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('imagemanager', 'The requested image does not exist.'));
 		}
 	}
 

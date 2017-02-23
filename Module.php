@@ -35,6 +35,12 @@ class Module extends \yii\base\Module {
 	 */
 	public $canRemoveImage = true;
 
+    /**
+     * @var bool|callable Variable that defines if blameable behavior is used.
+     * This can be a boolean, or a callable function that returns a boolean
+     */
+	public $setBlameableBehavior = false;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -66,6 +72,11 @@ class Module extends \yii\base\Module {
 		if (is_callable($this->canUploadImage)) {
 			$this->canUploadImage = call_user_func($this->canUploadImage);
 		}
+
+		// Check if blameable behavior is callable
+        if (is_callable($this->setBlameableBehavior))
+            $this->setBlameableBehavior = call_user_func($this->setBlameableBehavior);
+
 
 		// Check if the variable configuration is correct in order for the module to function
 		$this->_checkVariableConfiguration();
@@ -129,6 +140,18 @@ class Module extends \yii\base\Module {
 		if (!is_bool($this->canRemoveImage)) {
 			throw new InvalidConfigException('$removeImageAllowed variable only supports a boolean value, if you have a custom function you must return a boolean');
 		}
+		// Check if the setBlamableBehavior is boolean
+        if (! is_bool($this->setBlameableBehavior))
+            throw new InvalidConfigException('$setBlameableBehavior only supports a boolean value, if you have a customer function make sure that you return a boolean');
+
+		// Check if the blameable behavior is set to true
+        if ($this->setBlameableBehavior) {
+            // Get the migration record
+            $mRecordMigrationRun = Yii::$app->db->createCommand('SELECT * FROM `migration` WHERE `version` = \'m170223_113221_addBlameableBehavior\'')->queryOne();
+            if ($mRecordMigrationRun === false) {
+                throw new InvalidConfigException('Image Manager: You have not run the latest migration, see the documentation how to do this.');
+            }
+        }
 	}
 
 }
