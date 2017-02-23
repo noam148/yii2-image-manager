@@ -338,13 +338,13 @@ class ManagerController extends Controller {
             if ($module->setBlameableBehavior) {
                 // Check if the user and record ID match
                 if (Yii::$app->user->id != $model->createdBy) {
-                    return null;
+                    throw new NotFoundHttpException(Yii::t('imagemanager', 'The requested image does not exist.'));
                 }
             }
 
 			return $model;
 		} else {
-			throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('imagemanager', 'The requested image does not exist.'));
 		}
 	}
 
