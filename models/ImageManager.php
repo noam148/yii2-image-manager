@@ -35,10 +35,8 @@ class ImageManager extends \yii\db\ActiveRecord {
             'value' => new Expression('NOW()'),
         ];
 
-        // Get the module instance
-        $module = Module::getInstance();
-
-        if ($module->setBlameableBehavior) {
+        // Check if we need blamable behavior
+        if (Yii::$app->getModule('imagemanager')->setBlameableBehavior) {
             $aBehaviors[] = [
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'createdBy',
