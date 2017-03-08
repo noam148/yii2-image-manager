@@ -80,6 +80,8 @@ echo $form->field($model, 'ImageManager_id_avatar')->widget(\noam148\imagemanage
 	'aspectRatio' => (16/9), //set the aspect ratio
 	'showPreview' => true, //false to hide the preview
 	'showDeletePickedImageConfirm' => false, //on true show warning before detach image
+	'cropViewMode' => 1, // Set the cropper view mode, see option info: https://github.com/fengyuanchen/cropper/#viewmode
+	'cropDragMode' => 'crop' // Set the cropper draw mode, see option info: https://github.com/fengyuanchen/cropper/#dragmode
 ]);
 ```
 ![Image widget](/docs/images/img_doc-image-widget.jpg)

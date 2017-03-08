@@ -3,18 +3,27 @@ var imageManagerModule = {
 	fieldId: null,
 	cropRatio: null,
 	cropViewMode: 1,
+    cropDragMode: "crop",
 	defaultImageId: null,
-	selectType: null, 
+	selectType: null,
+	cropperConfiguration: {},
 	//current selected image
 	selectedImage: null,
 	//language
 	message: null,
 	//init imageManager
 	init: function(){
+		// Build the array with the basic configuration
+		imageManagerModule.cropperConfiguration = {
+			"viewMode": imageManagerModule.cropViewMode,
+			"dragMode": imageManagerModule.cropDragMode
+		};
+
+		// Set the cropper defaults
+        $.fn.cropper.setDefaults(imageManagerModule.cropperConfiguration);
+
 		//init cropper
-		$('#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper').cropper({
-			viewMode: imageManagerModule.cropViewMode
-		});
+		$('#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper').cropper();
 		
 		//preselect image if image-id isset
 		if(imageManagerModule.defaultImageId !== ""){
@@ -224,8 +233,8 @@ var imageManagerModule = {
 							//show cropper
 							$("#module-imagemanager > .row .col-image-cropper").css("visibility","visible");
 						})
-						.cropper('reset')
-						.cropper('setAspectRatio', parseFloat(imageManagerModule.cropRatio))
+						.cropper('reset') // Reset the cropper
+						.cropper('setAspectRatio', parseFloat(imageManagerModule.cropRatio)) // Set the aspect ratio
 						.cropper('replace', responseData);
 						//open editor
 						imageManagerModule.editor.open();
