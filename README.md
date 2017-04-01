@@ -56,7 +56,7 @@ and in `modules` section, for example:
 		},
 		//add css files (to use in media manage selector iframe)
 		'cssFiles' => [
-			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
+			//'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
 		],
 	],
 ],
@@ -71,6 +71,19 @@ If you want to add tags to you images it is possible to categorize them by tags
 yii migrate --migrationPath=@noam148/imagemanager/migrations/tag
 ```
 
+You will probably find that you need to override the default tag views provided by the module. Yii2 provides a way to override views using themes. To get started configure your view application component as follows:
+
+```php
+'components' => [
+	'view'=> [
+		'theme' => [
+			'pathMap' => [
+				'@noam148/imagemanager/views/tag' => '@backend/views/tag'
+			],
+		],
+	],
+]
+```
 
 Usage
 -----

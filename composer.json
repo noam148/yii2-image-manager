@@ -14,7 +14,8 @@
     "require": {
         "yiisoft/yii2": "*",
 		"noam148/yii2-image-resize" : "*",
-		"kartik-v/yii2-widget-fileinput": "@dev"
+		"kartik-v/yii2-widget-fileinput": "@dev",
+		"FortAwesome/Font-Awesome": "*"
     },
     "autoload": {
         "psr-4": {

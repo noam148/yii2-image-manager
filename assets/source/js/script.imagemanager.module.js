@@ -12,7 +12,7 @@ var imageManagerModule = {
 	//init imageManager
 	init: function(){
 		//init cropper
-		$('#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper').cropper({
+		$('#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper img#image-cropper').cropper({
 			viewMode: imageManagerModule.cropViewMode
 		});
 		
@@ -220,7 +220,7 @@ var imageManagerModule = {
 						//hide cropper
 						$("#module-imagemanager > .row .col-image-cropper").css("visibility","hidden");
 						//set image in cropper
-						$('#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper').one('built.cropper', function () {
+						$('#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper img#image-cropper').one('built.cropper', function () {
 							//show cropper
 							$("#module-imagemanager > .row .col-image-cropper").css("visibility","visible");
 						})
@@ -244,8 +244,8 @@ var imageManagerModule = {
 			pickAfterCrop = pickAfterCrop !== undefined ? pickAfterCrop : false;
 			//check if isset image
 			if(imageManagerModule.selectedImage !== null){
-				//set image in cropper
-				var oCropData = $('#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper').cropper("getData");
+				//get image data in cropper
+				var oCropData = $('#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper img#image-cropper').cropper("getData");
 				//call action by ajax
 				$.ajax({
 					url: imageManagerModule.baseUrl+"/crop",
@@ -280,6 +280,20 @@ var imageManagerModule = {
 			}else{
 				alert("Error: image can't crop, no image isset set");
 			}
+		},
+		applyRotate: function(direction){
+			var degrees = 0;
+			//set rotate direction
+			switch(direction){
+				case "left":
+					degrees = -45;
+					break;
+				case "right":
+					degrees = 45;
+					break;
+			}
+			//set rotation
+			$('#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper img#image-cropper').cropper('rotate', degrees);
 		}
 	}
 };
@@ -310,17 +324,23 @@ $(document).ready(function () {
 		return false;
 	});
 	//on click apply crop
-	$(document).on("click", "#module-imagemanager .image-cropper .apply-crop", function (){
+	$(document).on("click", "#module-imagemanager .image-editor .apply-crop", function (){
 		imageManagerModule.editor.applyCrop();	
 		return false;
 	});
+	//on click apply rotate
+	$(document).on("click", "#module-imagemanager .image-editor .apply-rotate", function (){
+		var sDirection = $(this).data("rotate-direction");
+		imageManagerModule.editor.applyRotate(sDirection);	
+		return false;
+	});
 	//on click apply crop
-	$(document).on("click", "#module-imagemanager .image-cropper .apply-crop-select", function (){
+	$(document).on("click", "#module-imagemanager .image-editor .apply-crop-select", function (){
 		imageManagerModule.editor.applyCrop(true);	
 		return false;
 	});
 	//on click cancel crop
-	$(document).on("click", "#module-imagemanager .image-cropper .cancel-crop", function (){
+	$(document).on("click", "#module-imagemanager .image-editor .cancel-crop", function (){
 		imageManagerModule.editor.close();	
 		return false;
 	});

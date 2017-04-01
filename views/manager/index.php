@@ -11,24 +11,29 @@ $this->title = "Image manager";
 <div id="module-imagemanager" class="container-fluid <?=$selectType?>">
 	<div class="row">
 		<div class="col-xs-6 col-sm-10 col-image-editor">
-			<div class="image-cropper">
+			<div class="image-editor">
 				<div class="image-wrapper">
 					<img id="image-cropper" />
 				</div>
 				<div class="action-buttons">
-					<a href="#" class="btn btn-primary apply-crop">
-						<i class="fa fa-crop"></i>
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
+					<div class="btn-group">
+						<button type="button" class="btn btn-primary apply-rotate" data-rotate-direction="left" title="<?=Yii::t('imagemanager','Rotate left')?>">
+							<i class="fa fa-rotate-left"></i>
+						</button>
+						<button type="button" class="btn btn-primary apply-rotate" data-rotate-direction="right" title="<?=Yii::t('imagemanager','Rotate right')?>">
+							<i class="fa fa-rotate-right"></i>
+						</button>
+					</div>
+					<a href="#" class="btn btn-primary apply-crop" title="<?=Yii::t('imagemanager','Edit image')?>">
+						<i class="fa fa-floppy-o"></i>
 					</a>
 					<?php if($viewMode === "iframe"): ?>
-					<a href="#" class="btn btn-primary apply-crop-select">
-						<i class="fa fa-crop"></i>
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop and select')?></span>
+					<a href="#" class="btn btn-primary apply-crop-select" title="<?=Yii::t('imagemanager','Edit and select')?>">
+						<i class="fa fa-floppy-o"></i> <i class="fa fa-check"></i>
 					</a>
 					<?php endif; ?>
-					<a href="#" class="btn btn-default cancel-crop">
-						<i class="fa fa-undo"></i>
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
+					<a href="#" class="btn btn-default cancel-crop" title="<?=Yii::t('imagemanager','Cancel')?>">
+						<i class="fa fa-times"></i>
 					</a>
 				</div>
 			</div> 
@@ -52,11 +57,8 @@ $this->title = "Image manager";
 			<div class="form-group">
 				<?=Html::textInput('input-mediamanager-search', null, ['id'=>'input-mediamanager-search', 'class'=>'form-control', 'placeholder'=>Yii::t('imagemanager','Search').'...'])?>
 			</div>
-
-			<?php
-				if (Yii::$app->controller->module->canUploadImage):
-			?>
-
+			
+			<?php if (Yii::$app->controller->module->canUploadImage): ?>
 			<?=FileInput::widget([
 				'name' => 'imagemanagerFiles[]',
 				'id' => 'imagemanager-files',
@@ -84,19 +86,16 @@ $this->title = "Image manager";
 					"fileuploaderror" => "function(event, data) { $('.msg-invalid-file-extension').removeClass('hide'); }",
 				],
 			]) ?>
-
-			<?php
-				endif;
-			?>
+			<?php endif; ?>
 
 			<div class="image-info hide">
 				<div class="thumbnail">
 					<img src="#">
 				</div>
 				<div class="edit-buttons">
-					<a href="#" class="btn btn-primary btn-block crop-image-item">
+					<a href="#" class="btn btn-primary btn-block crop-image-item" title="<?=Yii::t('imagemanager','Edit')?>">
 						<i class="fa fa-crop"></i>
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
+						<span class="hidden-xs"><?=Yii::t('imagemanager','Edit')?></span>
 					</a>
 				</div>
 				<div class="details">
@@ -104,16 +103,12 @@ $this->title = "Image manager";
 					<div class="created"></div>
 					<div class="fileSize"></div>
 					<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>
-					<?php
-						if (Yii::$app->controller->module->canRemoveImage):
-					?>
-						<a href="#" class="btn btn-xs btn-danger delete-image-item" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <?=Yii::t('imagemanager','Delete')?></a>
-					<?php
-						endif;
-					?>
+					<?php if (Yii::$app->controller->module->canRemoveImage): ?>
+					<a href="#" class="btn btn-xs btn-danger delete-image-item" title="<?=Yii::t('imagemanager','Delete')?>" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <?=Yii::t('imagemanager','Delete')?></a>
+					<?php endif; ?>
 				</div>
 				<?php if($viewMode === "iframe"): ?>
-				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a> 
+				<a href="#" class="btn btn-primary btn-block pick-image-item" title="<?=Yii::t('imagemanager','Select')?>"><?=Yii::t('imagemanager','Select')?></a> 
 				<?php endif; ?>
 			</div>
 		</div>

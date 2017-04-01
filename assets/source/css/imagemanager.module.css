@@ -15,8 +15,8 @@
 /*edit column*/
 #module-imagemanager > .row .col-image-editor{ padding-left: 0; display: none; }
 /*cropper*/
-#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; }
-#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
+#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper{ max-height: 460px; }
+#module-imagemanager > .row .col-image-editor .image-editor .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
 #module-imagemanager > .row .col-options{ padding-right: 0; }
 /*File upload*/
@@ -26,11 +26,10 @@
 #module-imagemanager > .row .col-options .form-group .btn-add-flyleaf{ float: left; }
 /*details*/
 #module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
+#module-imagemanager > .row .col-options .image-info .btn{ text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 #module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; background: #dadada; }
 #module-imagemanager > .row .col-options .image-info .edit-buttons{ margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .details{}
 #module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #module-imagemanager > .row .col-options .image-info .pick-image-item{ margin-top: 10px; }
-
-#module-imagemanager a.delete-image-item { margin-top: 5px; }

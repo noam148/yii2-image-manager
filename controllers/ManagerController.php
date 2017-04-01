@@ -5,6 +5,7 @@ namespace noam148\imagemanager\controllers;
 use Yii;
 use noam148\imagemanager\models\ImageManager;
 use noam148\imagemanager\models\ImageManagerSearch;
+use noam148\imagemanager\assets\ImageManagerModuleAsset;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,7 +15,6 @@ use yii\helpers\Json;
 use yii\helpers\BaseFileHelper;
 use yii\imagine\Image;
 use Imagine\Image\Box;
-use Imagine\Image\Color;
 use Imagine\Image\Point;
 
 /**
@@ -50,6 +50,9 @@ class ManagerController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
+		//set asset
+		ImageManagerModuleAsset::register($this->view);		
+		
 		//get iframe parameters
 		$viewMode = Yii::$app->request->get("view-mode", "page");
 		$selectType = Yii::$app->request->get("select-type", "input");
@@ -92,11 +95,11 @@ class ManagerController extends Controller {
 
 		//render template
 		return $this->render(
-						'index', [
-					'searchModel' => $searchModel,
-					'dataProvider' => $dataProvider,
-					'viewMode' => $viewMode,
-					'selectType' => $selectType,
+			'index', [
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+			'viewMode' => $viewMode,
+			'selectType' => $selectType,
 		]);
 	}
 
@@ -190,7 +193,17 @@ class ManagerController extends Controller {
 			if ($model->save()) {
 				//create file to dir
 				$sSaveFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
-
+				
+				
+				Image::crop($modelOriginal->imagePathPrivate, $aCropData['width'], $aCropData['height'], [$aCropData['x'], $aCropData['y']] )
+					->save($sMediaPath . "/" . $sSaveFileName);
+				
+				/*
+				$oOriginalImage = Image::getImagine()->open($modelOriginal->imagePathPrivate);
+				$oOriginalImageSize = $oOriginalImage->getSize();
+				$oImageColorPalette = new \Imagine\Image\Palette\RGB();
+				$oImageColor = $oImageColorPalette->color('#000', 0);
+				
 				if ($aCropData['x'] < 0 || $aCropData['y'] < 0) {
 					//get position
 					$posX = $aCropData['x'];
@@ -210,23 +223,21 @@ class ManagerController extends Controller {
 					}
 
 					//crop image
-					$image = Image::getImagine()->open($modelOriginal->imagePathPrivate)
-							->crop(new Point(0, 0), new Box($iCropWidth, $iCropHeight));
-
+					$oImageCropped = $oOriginalImage->crop(new Point(0, 0), new Box($iCropWidth, $iCropHeight));
+										
 					//create image
-					$size = new Box($aCropData['width'], $aCropData['height']);
-					$color = new Color('#FFF', 100);
-					Image::getImagine()->create($size, $color)
-							->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
-							->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
-							->save($sMediaPath . "/" . $sSaveFileName);
+					Image::getImagine()->create(new Box($aCropData['width'], $aCropData['height']), $oImageColor)
+						->paste($oImageCropped, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
+						->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
+						->save($sMediaPath . "/" . $sSaveFileName);
 				} else {
 					//save new image
 					Image::getImagine()
-							->open($modelOriginal->imagePathPrivate)
-							->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
-							->save($sMediaPath . "/" . $sSaveFileName);
-				}
+						->create(new Box($oOriginalImageSize->getWidth(), $oOriginalImageSize->getHeight()), $oImageColor)
+						->paste($oOriginalImage, new Point(0, 0))						
+						->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
+						->save($sMediaPath . "/" . $sSaveFileName);
+				}*/
 
 				//set return id
 				$return = $model->id;

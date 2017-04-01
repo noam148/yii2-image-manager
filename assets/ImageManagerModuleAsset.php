@@ -19,5 +19,6 @@ class ImageManagerModuleAsset extends AssetBundle
     public $depends = [
 		'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+		'noam148\imagemanager\assets\FontAwesomeAsset',
     ];
 }
