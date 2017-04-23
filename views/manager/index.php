@@ -5,7 +5,7 @@ use yii\widgets\ListView;
 use yii\widgets\Pjax;
 use kartik\file\FileInput;
 
-$this->title = "Image manager";
+$this->title = Yii::t('imagemanager','Image manager');
 
 ?>
 <div id="module-imagemanager" class="container-fluid <?=$selectType?>">
@@ -74,7 +74,7 @@ $this->title = "Image manager";
 					'showCancel' => false,
 					'browseClass' => 'btn btn-primary btn-block',
 					'browseIcon' => '<i class="fa fa-upload"></i> ',
-					'browseLabel' => 'Upload'
+					'browseLabel' => Yii::t('imagemanager','Upload')
 				],
 				'pluginEvents' => [
 					"filebatchselected" => "function(event, files){  $('.msg-invalid-file-extension').addClass('hide'); $(this).fileinput('upload'); }",
@@ -116,6 +116,6 @@ $this->title = "Image manager";
 				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a> 
 				<?php endif; ?>
 			</div>
-		</div>
+		</div>  
 	</div>
-</div>
+</div>  
