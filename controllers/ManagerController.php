@@ -201,54 +201,99 @@ class ManagerController extends Controller {
                 
                 //do crop in try catch
                 try {
-                    //create file to dir
+                    // create file name
                     $sSaveFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
-
-                    if ($aCropData['x'] < 0 || $aCropData['y'] < 0) {
-                        //get position
-                        $posX = $aCropData['x'];
-                        $posY = $aCropData['y'];
-                        //get image size
-                        $sizeImage = getimagesize($modelOriginal->imagePathPrivate);
-                        $sizeImageW = $sizeImage[0]; // natural width
-                        $sizeImageH = $sizeImage[1]; // natural height
-                        //get orignal image and crop it
-                        $iCropWidth = $sizeImageW;
-                        if ($sizeImageW > $aCropData['width']) {
-                            $iCropWidth = $aCropData['width'] - abs($posX);
+                    
+                    // get current/original image data
+                    $imageOriginal = Image::getImagine()->open($modelOriginal->imagePathPrivate);
+                    $imageOriginalSize = $imageOriginal->getSize();
+                    $imageOriginalWidth = $imageOriginalSize->getWidth();
+                    $imageOriginalHeight = $imageOriginalSize->getHeight();
+                    $imageOriginalPositionX = 0;
+                    $imageOriginalPositionY = 0;
+                    
+                    // create/calculate a canvas size (if canvas is out of the box)
+                    $imageCanvasWidth = $imageOriginalWidth;
+                    $imageCanvasHeight = $imageOriginalHeight;
+                    
+                    // update canvas width if X position of croparea is lower than 0 
+                    if($aCropData['x'] < 0){
+                        //set x postion to Absolute value
+                        $iAbsoluteXpos = abs($aCropData['x']);
+                        //set x position of image
+                        $imageOriginalPositionX = $iAbsoluteXpos;
+                        //add x position to canvas size
+                        $imageCanvasWidth += $iAbsoluteXpos;
+                        //update canvas width if croparea is biger than original image
+                        $iCropWidthWithoutAbsoluteXpos = ($aCropData['width'] - $iAbsoluteXpos);
+                        if($iCropWidthWithoutAbsoluteXpos > $imageOriginalWidth){
+                            //add ouside the box width
+                            $imageCanvasWidth += ($iCropWidthWithoutAbsoluteXpos - $imageOriginalWidth);
                         }
-                        $iCropHeight = $sizeImageH;
-                        if ($sizeImageH > $aCropData['height']) {
-                            $iCropHeight = $aCropData['height'] - abs($posY);
-                        }
-
-                        //crop image
-                        $image = Image::getImagine()->open($modelOriginal->imagePathPrivate)
-                                ->crop(new Point(0, 0), new Box($iCropWidth, $iCropHeight));
-
-                        //create image
-                        $size = new Box($aCropData['width'], $aCropData['height']);
-                        $palette = new RGB();
-                        $color = $palette->color('#FFF', 0);
-
-                        Image::getImagine()->create($size, $color)
-                                ->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
-                                ->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
-                                ->save($sMediaPath . "/" . $sSaveFileName);
                     } else {
-                        //save new image
-                        Image::getImagine()
-                                ->open($modelOriginal->imagePathPrivate)
-                                ->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
-                                ->save($sMediaPath . "/" . $sSaveFileName);
-
+                        // add if crop partly ouside image
+                        $iCropWidthWithXpos = ($aCropData['width'] + $aCropData['x']);
+                        if($iCropWidthWithXpos > $imageOriginalWidth){
+                            //add ouside the box width
+                            $imageCanvasWidth += ($iCropWidthWithXpos - $imageOriginalWidth);
+                        }
                     }
+                    
+                    // update canvas height if Y position of croparea is lower than 0 
+                    if($aCropData['y'] < 0){
+                        //set y postion to Absolute value
+                        $iAbsoluteYpos = abs($aCropData['y']);
+                        //set y position of image
+                        $imageOriginalPositionY = $iAbsoluteYpos;
+                        //add y position to canvas size
+                        $imageCanvasHeight += $iAbsoluteYpos;
+                        //update canvas height if croparea is biger than original image
+                        $iCropHeightWithoutAbsoluteYpos = ($aCropData['height'] - $iAbsoluteYpos);
+                        if($iCropHeightWithoutAbsoluteYpos > $imageOriginalHeight){
+                            //add ouside the box height
+                            $imageCanvasHeight += ($iCropHeightWithoutAbsoluteYpos - $imageOriginalHeight);
+                        }
+                    } else {
+                        // add if crop partly ouside image
+                        $iCropHeightWithYpos = ($aCropData['height'] + $aCropData['y']);
+                        if($iCropHeightWithYpos > $imageOriginalHeight){
+                            //add ouside the box height
+                            $imageCanvasHeight += ($iCropHeightWithYpos - $imageOriginalHeight);
+                        }
+                    }
+
+                    // round values
+                    $imageCanvasWidthRounded = round($imageCanvasWidth);
+                    $imageCanvasHeightRounded = round($imageCanvasHeight);
+                    $imageOriginalPositionXRounded = round($imageOriginalPositionX);
+                    $imageOriginalPositionYRounded = round($imageOriginalPositionY);
+                    $imageCropWidthRounded = round($aCropData['width']);
+                    $imageCropHeightRounded = round($aCropData['height']);
+                    // set postion to 0 if x or y is less than 0
+                    $imageCropPositionXRounded = $aCropData['x'] < 0 ? 0 : round($aCropData['x']);
+                    $imageCropPositionYRounded = $aCropData['y'] < 0 ? 0 :  round($aCropData['y']);
+                    
+//                    echo "canvas: ". $imageCanvasWidth ." x ".$imageCanvasHeight ."<br />";
+//                    echo "img pos x: ". $imageOriginalPositionX ." y ".$imageOriginalPositionY ."<br />";
+//                    die();
+//                       
+                    //todo: check if rotaded resize canvas (http://stackoverflow.com/questions/9971230/calculate-rotated-rectangle-size-from-known-bounding-box-coordinates)
+                    
+                    // merge current image in canvas, crop image and save
+                    $imagineRgb = new RGB();
+                    $imagineColor = $imagineRgb->color('#FFF', 0);
+                    // create image
+                    Image::getImagine()->create(new Box($imageCanvasWidthRounded, $imageCanvasHeightRounded), $imagineColor)
+                                ->paste($imageOriginal, new Point($imageOriginalPositionXRounded, $imageOriginalPositionYRounded))
+                                ->crop(new Point($imageCropPositionXRounded, $imageCropPositionYRounded), new Box($imageCropWidthRounded, $imageCropHeightRounded))
+                                ->save($sMediaPath . "/" . $sSaveFileName);
                     
                     //set boolean crop success to true
                     $bCropSuccess = true;
                     
                     //set return id
                     $return = $model->id;
+                    
                 } catch (ErrorException $e) {
                     
                 }
