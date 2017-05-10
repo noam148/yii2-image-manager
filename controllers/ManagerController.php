@@ -8,13 +8,14 @@ use noam148\imagemanager\models\ImageManagerSearch;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\base\ErrorException;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\BaseFileHelper;
 use yii\imagine\Image;
 use Imagine\Image\Box;
-use Imagine\Image\Color;
+use Imagine\Image\Palette\RGB;
 use Imagine\Image\Point;
 use noam148\imagemanager\Module;
 
@@ -183,56 +184,78 @@ class ManagerController extends Controller {
 			$sFileExtension = pathinfo($sFileNameReplace, PATHINFO_EXTENSION);
 			$sDisplayFileName = $sFileName . "_crop_" . $iDimensionWidth . "x" . $iDimensionHeight . "." . $sFileExtension;
 
+            //start transaction
+            $transaction  = Yii::$app->db->beginTransaction();
+            $bCropSuccess = false;
+            
 			//create a file record
 			$model = new ImageManager();
 			$model->fileName = $sDisplayFileName;
 			$model->fileHash = Yii::$app->getSecurity()->generateRandomString(32);
 			//if file is saved add record
 			if ($model->save()) {
-				//create file to dir
-				$sSaveFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
+                
+                //do crop in try catch
+                try {
+                    //create file to dir
+                    $sSaveFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
 
-				if ($aCropData['x'] < 0 || $aCropData['y'] < 0) {
-					//get position
-					$posX = $aCropData['x'];
-					$posY = $aCropData['y'];
-					//get image size
-					$sizeImage = getimagesize($modelOriginal->imagePathPrivate);
-					$sizeImageW = $sizeImage[0]; // natural width
-					$sizeImageH = $sizeImage[1]; // natural height
-					//get orignal image and crop it
-					$iCropWidth = $sizeImageW;
-					if ($sizeImageW > $aCropData['width']) {
-						$iCropWidth = $aCropData['width'] - abs($posX);
-					}
-					$iCropHeight = $sizeImageH;
-					if ($sizeImageH > $aCropData['height']) {
-						$iCropHeight = $aCropData['height'] - abs($posY);
-					}
+                    if ($aCropData['x'] < 0 || $aCropData['y'] < 0) {
+                        //get position
+                        $posX = $aCropData['x'];
+                        $posY = $aCropData['y'];
+                        //get image size
+                        $sizeImage = getimagesize($modelOriginal->imagePathPrivate);
+                        $sizeImageW = $sizeImage[0]; // natural width
+                        $sizeImageH = $sizeImage[1]; // natural height
+                        //get orignal image and crop it
+                        $iCropWidth = $sizeImageW;
+                        if ($sizeImageW > $aCropData['width']) {
+                            $iCropWidth = $aCropData['width'] - abs($posX);
+                        }
+                        $iCropHeight = $sizeImageH;
+                        if ($sizeImageH > $aCropData['height']) {
+                            $iCropHeight = $aCropData['height'] - abs($posY);
+                        }
 
-					//crop image
-					$image = Image::getImagine()->open($modelOriginal->imagePathPrivate)
-							->crop(new Point(0, 0), new Box($iCropWidth, $iCropHeight));
+                        //crop image
+                        $image = Image::getImagine()->open($modelOriginal->imagePathPrivate)
+                                ->crop(new Point(0, 0), new Box($iCropWidth, $iCropHeight));
 
-					//create image
-					$size = new Box($aCropData['width'], $aCropData['height']);
-					$color = new Color('#FFF', 100);
-					Image::getImagine()->create($size, $color)
-							->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
-							->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
-							->save($sMediaPath . "/" . $sSaveFileName);
-				} else {
-					//save new image
-					Image::getImagine()
-							->open($modelOriginal->imagePathPrivate)
-							->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
-							->save($sMediaPath . "/" . $sSaveFileName);
-				}
+                        //create image
+                        $size = new Box($aCropData['width'], $aCropData['height']);
+                        $palette = new RGB();
+                        $color = $palette->color('#FFF', 0);
 
-				//set return id
-				$return = $model->id;
+                        Image::getImagine()->create($size, $color)
+                                ->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
+                                ->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
+                                ->save($sMediaPath . "/" . $sSaveFileName);
+                    } else {
+                        //save new image
+                        $test = Image::getImagine()
+                                ->open($modelOriginal->imagePathPrivate)
+                                ->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
+                                ->save($sMediaPath . "/" . $sSaveFileName);
+
+                    }
+                    
+                    //set boolean crop success to true
+                    $bCropSuccess = true;
+                    
+                    //set return id
+                    $return = $model->id;
+                } catch (ErrorException $e) {
+
+                }
 			}
+            
+            //commit transaction if boolean is true
+            if($bCropSuccess){
+                $transaction->commit();
+            }
 		}
+        
 		//echo return json encoded
 		return $return;
 	}
