@@ -5,6 +5,7 @@ namespace noam148\imagemanager\controllers;
 use Yii;
 use noam148\imagemanager\models\ImageManager;
 use noam148\imagemanager\models\ImageManagerSearch;
+use noam148\imagemanager\assets\ImageManagerModuleAsset;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -52,6 +53,9 @@ class ManagerController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
+        //set asset
+		ImageManagerModuleAsset::register($this->view);	
+        
 		//get iframe parameters
 		$viewMode = Yii::$app->request->get("view-mode", "page");
 		$selectType = Yii::$app->request->get("select-type", "input");
@@ -227,7 +231,7 @@ class ManagerController extends Controller {
                         $palette = new RGB();
                         $color = $palette->color('#FFF', 0);
 
-                        Image::getImagine()->create($size, $color)
+                        Image::getImagine()->create($size, nul)
                                 ->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
                                 ->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
                                 ->save($sMediaPath . "/" . $sSaveFileName);

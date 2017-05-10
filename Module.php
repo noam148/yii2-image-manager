@@ -83,36 +83,6 @@ class Module extends \yii\base\Module {
 	}
 
 	/**
-	 * @inheritdoc
-	 */
-	public function beforeAction($action) {
-		if (parent::beforeAction($action)) {
-			//set view
-			$view = $action->controller->getView();
-
-			//set asset
-			ImageManagerModuleAsset::register($view);
-
-			//get parameters
-			$viewMode = Yii::$app->request->get("view-mode", "page");
-
-			/* @var $action \yii\base\Action */
-			if ($viewMode == "iframe") {
-				//set stylesheet for modal
-				if (is_array($this->cssFiles) && count($this->cssFiles) > 0) {
-					//if exists loop through files and add them to iframe mode
-					foreach ($this->cssFiles AS $cssFile) {
-						//registrate file
-						$view->registerCssFile($cssFile, ['depends' => 'yii\bootstrap\BootstrapAsset']);
-					}
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Check if extensions exists
 	 * @throws UnknownClassException Throw error if extension is not found
 	 */
