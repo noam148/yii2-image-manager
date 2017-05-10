@@ -231,13 +231,13 @@ class ManagerController extends Controller {
                         $palette = new RGB();
                         $color = $palette->color('#FFF', 0);
 
-                        Image::getImagine()->create($size, nul)
+                        Image::getImagine()->create($size, $color)
                                 ->paste($image, new Point(($posX < 0 ? abs($posX) : $posX), ($posY < 0 ? abs($posY) : $posY)))
                                 ->crop(new Point(($posX < 0 ? 0 : $posX), ($posY < 0 ? 0 : $posY)), new Box($aCropData['width'], $aCropData['height']))
                                 ->save($sMediaPath . "/" . $sSaveFileName);
                     } else {
                         //save new image
-                        $test = Image::getImagine()
+                        Image::getImagine()
                                 ->open($modelOriginal->imagePathPrivate)
                                 ->crop(new Point($aCropData['x'], $aCropData['y']), new Box($aCropData['width'], $aCropData['height']))
                                 ->save($sMediaPath . "/" . $sSaveFileName);
@@ -250,7 +250,7 @@ class ManagerController extends Controller {
                     //set return id
                     $return = $model->id;
                 } catch (ErrorException $e) {
-
+                    
                 }
 			}
             
