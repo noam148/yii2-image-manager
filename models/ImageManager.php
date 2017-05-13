@@ -81,7 +81,16 @@ class ImageManager extends \yii\db\ActiveRecord {
 		];
 	}
 
-	/**
+	public function afterDelete()
+    {
+        parent::afterDelete();
+
+        // Check if file exists
+        if (file_exists($this->getImagePathPrivate()))
+            unlink($this->getImagePathPrivate());
+    }
+
+    /**
 	 * Get image path private
 	 * @return string|null If image file exists the path to the image, if file does not exists null
 	 */

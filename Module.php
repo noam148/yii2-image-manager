@@ -41,6 +41,12 @@ class Module extends \yii\base\Module {
      */
 	public $setBlameableBehavior = false;
 
+    /**
+     * @var bool|callable Variable that defines if the original image that was used to make the crop will be deleted after the cropped image has been saved
+     * By default the original and the cropped image will both be saved, this function can also be a callable.
+     */
+	public $deleteOriginalAfterCrop = false;
+
 	/**
 	 * @inheritdoc
 	 */
@@ -77,6 +83,9 @@ class Module extends \yii\base\Module {
         if (is_callable($this->setBlameableBehavior))
             $this->setBlameableBehavior = call_user_func($this->setBlameableBehavior);
 
+		// Check if the Delete original after crop variable is callable
+        if (is_callable($this->deleteOriginalAfterCrop))
+            $this->deleteOriginalAfterCrop = call_user_func($this->deleteOriginalAfterCrop);
 
 		// Check if the variable configuration is correct in order for the module to function
 		$this->_checkVariableConfiguration();
@@ -104,15 +113,18 @@ class Module extends \yii\base\Module {
 	private function _checkVariableConfiguration() {
 		// Check if the canUploadImage is boolean
 		if (!is_bool($this->canUploadImage)) {
-			throw new InvalidConfigException('$canUploadImage variable only supports a boolean value, if you have a custom function you must return a boolean');
+			throw new InvalidConfigException('$canUploadImage variable only supports a boolean value, if you have a custom function you must return a boolean.');
 		}
 		// Check if the canRemoveImage is boolean
 		if (!is_bool($this->canRemoveImage)) {
-			throw new InvalidConfigException('$removeImageAllowed variable only supports a boolean value, if you have a custom function you must return a boolean');
+			throw new InvalidConfigException('$removeImageAllowed variable only supports a boolean value, if you have a custom function you must return a boolean.');
 		}
 		// Check if the setBlamableBehavior is boolean
         if (! is_bool($this->setBlameableBehavior))
-            throw new InvalidConfigException('$setBlameableBehavior only supports a boolean value, if you have a customer function make sure that you return a boolean');
+            throw new InvalidConfigException('$setBlameableBehavior only supports a boolean value, if you have a custom function make sure that you return a boolean.');
+        // Check if the deleteOriginalAfterCrop is boolean
+        if (! is_bool($this->deleteOriginalAfterCrop))
+            throw new InvalidConfigException('$deleteOriginalAfterCrop only supports boolean value, if you have a custom function make sure that your return a boolean.');
 
 		// Check if the blameable behavior is set to true
         if ($this->setBlameableBehavior) {
