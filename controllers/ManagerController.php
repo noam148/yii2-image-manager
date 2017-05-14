@@ -296,7 +296,7 @@ class ManagerController extends Controller {
                     $return = $model->id;
 
                     // Check if the original image must be delete
-                    if ($this->module->deleteOriginalAfterCrop) {
+                    if ($this->module->deleteOriginalAfterEdit) {
                         $modelOriginal->delete();
                     }
                 } catch (ErrorException $e) {

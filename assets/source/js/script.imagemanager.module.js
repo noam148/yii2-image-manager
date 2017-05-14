@@ -178,7 +178,7 @@ var imageManagerModule = {
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				alert("Error: can't get ''data''");
+				alert("Can't view image. Error: "+jqXHR.responseText);
 			}
 		});
 	},

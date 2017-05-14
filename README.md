@@ -54,6 +54,7 @@ and in `modules` section, for example:
 		'canRemoveImage' => function(){
 			return true;
 		},
+		'deleteOriginalAfterEdit' => false, // false: keep original image after edit. true: delete original image after edit
 		// Set if blameable behavior is used, if it is, callable function can also be used
 		'setBlameableBehavior' => false,
 		//add css files (to use in media manage selector iframe)

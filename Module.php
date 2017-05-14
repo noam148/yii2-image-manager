@@ -45,7 +45,7 @@ class Module extends \yii\base\Module {
      * @var bool|callable Variable that defines if the original image that was used to make the crop will be deleted after the cropped image has been saved
      * By default the original and the cropped image will both be saved, this function can also be a callable.
      */
-	public $deleteOriginalAfterCrop = false;
+	public $deleteOriginalAfterEdit = false;
 
 	/**
 	 * @inheritdoc
@@ -84,8 +84,8 @@ class Module extends \yii\base\Module {
             $this->setBlameableBehavior = call_user_func($this->setBlameableBehavior);
 
 		// Check if the Delete original after crop variable is callable
-        if (is_callable($this->deleteOriginalAfterCrop))
-            $this->deleteOriginalAfterCrop = call_user_func($this->deleteOriginalAfterCrop);
+        if (is_callable($this->deleteOriginalAfterEdit))
+            $this->deleteOriginalAfterEdit = call_user_func($this->deleteOriginalAfterEdit);
 
 		// Check if the variable configuration is correct in order for the module to function
 		$this->_checkVariableConfiguration();
@@ -122,9 +122,9 @@ class Module extends \yii\base\Module {
 		// Check if the setBlamableBehavior is boolean
         if (! is_bool($this->setBlameableBehavior))
             throw new InvalidConfigException('$setBlameableBehavior only supports a boolean value, if you have a custom function make sure that you return a boolean.');
-        // Check if the deleteOriginalAfterCrop is boolean
-        if (! is_bool($this->deleteOriginalAfterCrop))
-            throw new InvalidConfigException('$deleteOriginalAfterCrop only supports boolean value, if you have a custom function make sure that your return a boolean.');
+        // Check if the deleteOriginalAfterEdit is boolean
+        if (! is_bool($this->deleteOriginalAfterEdit))
+            throw new InvalidConfigException('$deleteOriginalAfterEdit only supports boolean value, if you have a custom function make sure that your return a boolean.');
 
 		// Check if the blameable behavior is set to true
         if ($this->setBlameableBehavior) {
