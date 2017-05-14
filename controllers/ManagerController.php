@@ -22,6 +22,7 @@ use noam148\imagemanager\Module;
 
 /**
  * Manager controller for the `imagemanager` module
+ * @property $module Module
  */
 class ManagerController extends Controller {
 
@@ -293,7 +294,11 @@ class ManagerController extends Controller {
                     
                     //set return id
                     $return = $model->id;
-                    
+
+                    // Check if the original image must be delete
+                    if ($this->module->deleteOriginalAfterCrop) {
+                        $modelOriginal->delete();
+                    }
                 } catch (ErrorException $e) {
                     
                 }
@@ -367,29 +372,19 @@ class ManagerController extends Controller {
 		//set response header
 		Yii::$app->getResponse()->format = Response::FORMAT_JSON;
 
-        // Check if the user is allowed to delete the image
-        if (Yii::$app->controller->module->canRemoveImage == false) {
-            // Return the response array to prevent from the action being executed any further
+        if (Yii::$app->controller->module->canRemoveImage == false)
+            // User can not remove this image, return false status
             return $return;
-        }
 
 		//get post
 		$ImageManager_id = Yii::$app->request->post("ImageManager_id");
 		//get details
 		$model = $this->findModel($ImageManager_id);
 
-		//set some data
-		$sFileExtension = pathinfo($model->fileName, PATHINFO_EXTENSION);
-		$sMediaPath = \Yii::$app->imagemanager->mediaPath;
-		$sFileName = $model->id . "_" . $model->fileHash . "." . $sFileExtension;
 		//delete record
-		if ($model->delete()) {
-			//check if file exists? if it is delete file
-			if (file_exists($sMediaPath . "/" . $sFileName)) {
-				unlink($sMediaPath . "/" . $sFileName);
-			}
+		if ($model->delete())
 			$return['delete'] = true;
-		}
+
 		return $return;
 	}
 
