@@ -117,7 +117,7 @@ class Module extends \yii\base\Module {
 		// Check if the blameable behavior is set to true
         if ($this->setBlameableBehavior) {
             // Get the migration record
-            $mRecordMigrationRun = Yii::$app->db->createCommand('SELECT * FROM `migration` WHERE `version` = \'m170223_113221_addBlameableBehavior\'')->queryOne();
+            $mRecordMigrationRun = Yii::$app->db->createCommand('SELECT * FROM {{%migration}} WHERE `version` = \'m170223_113221_addBlameableBehavior\'')->queryOne();
             if ($mRecordMigrationRun === false) {
                 throw new InvalidConfigException('Image Manager: You have not run the latest migration, see the documentation how to do this.');
             }
