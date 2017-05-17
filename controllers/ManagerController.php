@@ -115,12 +115,14 @@ class ManagerController extends Controller {
 	public function actionUpload() {
         //set response header
         Yii::$app->getResponse()->format = Response::FORMAT_JSON;
-
         // Check if the user is allowed to upload the image
         if (Yii::$app->controller->module->canUploadImage == false) {
             // Return the response array to prevent from the action being executed any further
             return [];
         }
+        // Create the transaction and set the success variable
+        $transaction = Yii::$app->db->beginTransaction();
+        $bSuccess = false;
 
 		//disable Csrf
 		Yii::$app->controller->enableCsrfValidation = false;
@@ -152,10 +154,19 @@ class ManagerController extends Controller {
 						//move_uploaded_file($sTempFile, $sMediaPath."/".$sFileName);
 						//save with Imagine class
 						Image::getImagine()->open($sTempFile)->save($sMediaPath . "/" . $sSaveFileName);
+						$bSuccess = true;
 					}
 				}
 			}
 		}
+
+		if ($bSuccess)
+		    // The upload action went successful, save the transaction
+		    $transaction->commit();
+		else
+		    // There where problems during the upload, kill the transaction
+		    $transaction->rollBack();
+
 		//echo return json encoded
 		return $return;
 	}
