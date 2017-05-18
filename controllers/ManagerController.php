@@ -160,12 +160,13 @@ class ManagerController extends Controller {
 			}
 		}
 
-		if ($bSuccess)
+		if ($bSuccess) {
 		    // The upload action went successful, save the transaction
 		    $transaction->commit();
-		else
+		} else {
 		    // There where problems during the upload, kill the transaction
 		    $transaction->rollBack();
+		}
 
 		//echo return json encoded
 		return $return;
@@ -383,9 +384,10 @@ class ManagerController extends Controller {
 		//set response header
 		Yii::$app->getResponse()->format = Response::FORMAT_JSON;
 
-        if (Yii::$app->controller->module->canRemoveImage == false)
-            // User can not remove this image, return false status
-            return $return;
+		if (Yii::$app->controller->module->canRemoveImage == false) {
+		    // User can not remove this image, return false status
+		    return $return;
+		}
 
 		//get post
 		$ImageManager_id = Yii::$app->request->post("ImageManager_id");
@@ -393,9 +395,9 @@ class ManagerController extends Controller {
 		$model = $this->findModel($ImageManager_id);
 
 		//delete record
-		if ($model->delete())
+		if ($model->delete()) {
 			$return['delete'] = true;
-
+		}
 		return $return;
 	}
 
