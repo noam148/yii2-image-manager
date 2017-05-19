@@ -50,9 +50,10 @@ class ImageManagerGetPath extends Component {
 			'absoluteUrl' => $this->absoluteUrl,
 		]);
 
-		if (is_callable($this->databaseComponent))
+		if (is_callable($this->databaseComponent)) {
 		    // The database component is callable, run the user function
 		    $this->databaseComponent = call_user_func($this->databaseComponent);
+        }
 
         // Check if the user input is correct
         $this->_checkVariables();
@@ -100,16 +101,19 @@ class ImageManagerGetPath extends Component {
      */
 	private function _checkVariables() {
 	    // Check to make sure that the $databaseComponent is a string
-        if (! is_string($this->databaseComponent))
+        if (! is_string($this->databaseComponent)) {
             throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' is not a string");
+        }
 
         // Check to make sure that the $databaseComponent object exists
-        if (Yii::$app->get($this->databaseComponent, false) === null)
+        if (Yii::$app->get($this->databaseComponent, false) === null) {
             throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' does not exists in application configuration");
+        }
 
         // Check to make sure that the $databaseComponent is a yii\db\Connection object
-        if (($databaseComponentClassName = get_class(Yii::$app->get($this->databaseComponent))) !== ($connectionClassName = Connection::className()))
+        if (($databaseComponentClassName = get_class(Yii::$app->get($this->databaseComponent))) !== ($connectionClassName = Connection::className())) {
             throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' is not of type '$connectionClassName' instead it is '$databaseComponentClassName'");
+        }
     }
 
 }
