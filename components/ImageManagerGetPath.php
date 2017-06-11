@@ -2,8 +2,11 @@
 
 namespace noam148\imagemanager\components;
 
+use Yii;
 use yii\base\Component;
 use noam148\imagemanager\models\ImageManager;
+use yii\base\InvalidConfigException;
+use yii\db\Connection;
 
 class ImageManagerGetPath extends Component { 
 
@@ -27,10 +30,16 @@ class ImageManagerGetPath extends Component {
 	 */
 	public $absoluteUrl = false;
 
-	/*
+    /**
+     * @var string The DB component name that the image model uses
+     * This defaults to the default Yii DB component: Yii::$app->db
+     * If this component is not set, the model will default to DB
+     */
+	public $databaseComponent = 'db';
+
+	/**
 	 * Init set config
 	 */
-
 	public function init() {
 		parent::init();
 		// initialize the compontent with the configuration loaded from config.php
@@ -40,6 +49,14 @@ class ImageManagerGetPath extends Component {
 			'useFilename' => $this->useFilename,
 			'absoluteUrl' => $this->absoluteUrl,
 		]);
+
+		if (is_callable($this->databaseComponent)) {
+		    // The database component is callable, run the user function
+		    $this->databaseComponent = call_user_func($this->databaseComponent);
+        }
+
+        // Check if the user input is correct
+        $this->_checkVariables();
 	}
 
 	/**
@@ -77,5 +94,26 @@ class ImageManagerGetPath extends Component {
 		}
 		return $return;
 	}
+
+    /**
+     * Check if the user configurable variables match the criteria
+     * @throws InvalidConfigException
+     */
+	private function _checkVariables() {
+	    // Check to make sure that the $databaseComponent is a string
+        if (! is_string($this->databaseComponent)) {
+            throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' is not a string");
+        }
+
+        // Check to make sure that the $databaseComponent object exists
+        if (Yii::$app->get($this->databaseComponent, false) === null) {
+            throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' does not exists in application configuration");
+        }
+
+        // Check to make sure that the $databaseComponent is a yii\db\Connection object
+        if (($databaseComponentClassName = get_class(Yii::$app->get($this->databaseComponent))) !== ($connectionClassName = Connection::className())) {
+            throw new InvalidConfigException("Image Manager Component - Init: Database component '$this->databaseComponent' is not of type '$connectionClassName' instead it is '$databaseComponentClassName'");
+        }
+    }
 
 }
