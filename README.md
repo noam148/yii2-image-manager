@@ -39,6 +39,7 @@ yii migrate --migrationPath=@noam148/imagemanager/migrations
 		'useFilename' => true,
 		//show full url (for example in case of a API)
 		'absoluteUrl' => false,
+		'databaseComponent' => 'db' // The used database component by the image manager, this defaults to the Yii::$app->db component
 	],
 ],
 ```

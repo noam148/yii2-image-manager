@@ -60,6 +60,27 @@ class ImageManager extends \yii\db\ActiveRecord {
 		return 'ImageManager';
 	}
 
+    /**
+     * Get the DB component that the model uses
+     * This function will throw error if object could not be found
+     * The DB connection defaults to DB
+     * @return null|object
+     */
+	public static function getDb() {
+        // Get the image manager object
+        $oImageManager = Yii::$app->get('imagemanager', false);
+
+        if($oImageManager === null) {
+            // The image manager object has not been set
+            // The normal DB object will be returned, error will be thrown if not found
+            return Yii::$app->get('db');
+        }
+
+        // The image manager component has been loaded, the DB component that has been entered will be loaded
+        // By default this is the Yii::$app->db connection, the user can specify any other connection if needed
+        return Yii::$app->get($oImageManager->databaseComponent);
+    }
+
 	/**
 	 * @inheritdoc
 	 */
@@ -92,8 +113,9 @@ class ImageManager extends \yii\db\ActiveRecord {
         parent::afterDelete();
 
         // Check if file exists
-        if (file_exists($this->getImagePathPrivate()))
+        if (file_exists($this->getImagePathPrivate())) {
             unlink($this->getImagePathPrivate());
+        }
     }
 
     /**
