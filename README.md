@@ -33,8 +33,8 @@ yii migrate --migrationPath=@noam148/imagemanager/migrations
 		'class' => 'noam148\imagemanager\components\ImageManagerGetPath',
 		//set media path (outside the web folder is possible)
 		'mediaPath' => '/path/where/to/store/images/media/imagemanager',
-		//path relative web folder to store the cache images
-		'cachePath' => 'assets/images',
+        //path relative web folder. In case of multiple environments (frontend, backend) add more paths 
+        'cachePath' =>  ['assets/images', '../../frontend/web/assets/images'],
 		//use filename (seo friendly) for resized images else use a hash
 		'useFilename' => true,
 		//show full url (for example in case of a API)
@@ -93,7 +93,7 @@ If you want to use a image:
 /*
  * $ImageManager_id (id that is store in the ImageManager table)
  * $width/$height width height of the image
- * $thumbnailMode = "outbound" or "inset"
+ * $thumbnailMode: "outbound", "inset" or "{horz}:{vert}" where {horz} is one from "left", "center", "right" and {vert} is one from "top", "center", "bottom"
  */
 \Yii::$app->imagemanager->getImagePath($ImageManager_id, $width, $height,$thumbnailMode)
 ```

@@ -13,9 +13,10 @@ class ImageManagerGetPath extends Component {
 	public $mediaPath = null;
 
 	/**
-	 * @var string $cachePath cache path where store the resized images (relative from webroot (index.php))
-	 */
-	public $cachePath = "assets/imagemanager";
+	 * @var string|array $cachePath cache path(s) where store the resized images.
+     * In case of multiple environments (frontend, backend) add more paths
+     */
+	public $cachePath = ["assets/imagemanager"];
 
 	/**
 	 * @var boolean $useFilename use original filename in generated cache file
@@ -33,7 +34,13 @@ class ImageManagerGetPath extends Component {
 
 	public function init() {
 		parent::init();
-		// initialize the compontent with the configuration loaded from config.php
+
+        // If cachePath is not an array? Create an array
+        if(!is_array($this->cachePath)){
+            $this->cachePath = [$this->cachePath];
+        }
+
+		// Initialize the compontent with the configuration loaded from config.php
 		\Yii::$app->set('imageresize', [
 			'class' => 'noam148\imageresize\ImageResize',
 			'cachePath' => $this->cachePath,
@@ -57,8 +64,6 @@ class ImageManagerGetPath extends Component {
 
 		//check if not empty
 		if ($mImageManager !== null) {
-			//set crop mode
-			$mode = $thumbnailMode == "outbound" ? "outbound" : "inset";
 
 			$sMediaPath = null;
 			if ($this->mediaPath !== null) {
@@ -70,7 +75,7 @@ class ImageManagerGetPath extends Component {
 			$sImageFilePath = $sMediaPath . '/' . $mImageManager->id . '_' . $mImageManager->fileHash . '.' . $sFileExtension;
 			//check file exists
 			if (file_exists($sImageFilePath)) {
-				$return = \Yii::$app->imageresize->getUrl($sImageFilePath, $width, $height, $mode, null, $mImageManager->fileName);
+				$return = \Yii::$app->imageresize->getUrl($sImageFilePath, $width, $height, $thumbnailMode, null, $mImageManager->fileName);
 			} else {
 				$return = null; //isset(\Yii::$app->controller->module->assetPublishedUrl) ? \Yii::$app->controller->module->assetPublishedUrl. "/img/img_no-image.png" : null;
 			}
