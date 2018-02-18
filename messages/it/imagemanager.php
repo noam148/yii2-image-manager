@@ -1,17 +1,17 @@
 <?php
 return [
-    'Are you sure you want to delete this image?' => 'Vuole veramente cancellare questa immagine?',
+    'Are you sure you want to delete this image?' => 'Vuole veramente eliminare questa immagine?',
     'Are you sure you want to detach the image?' => 'Vuole distaccare questa immagine?',
-    'Cancel' => 'Cancellre',
+    'Cancel' => 'Annulla',
     'Created' => 'Creato',
-    'Crop' => 'Tagliare a formato',
-    'Crop and select' => 'Tagliare a formato e selezionare',
-    'Delete' => 'Cancellare',
+    'Crop' => 'Ritaglia',
+    'Crop and select' => 'Ritaglia e seleziona',
+    'Delete' => 'Elimina',
     'File hash' => 'File hash',
     'File name' => 'Nome del file',
     'Modified' => 'Modificato',
-    'Search' => 'Ricerca',
-    'Select' => 'Selezionare',
+    'Search' => 'Cerca',
+    'Select' => 'Seleziona',
     'Image manager' => 'Image manager',
-    'Upload' => 'Upload'
+    'Upload' => 'Carica'
 ];
