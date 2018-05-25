@@ -57,7 +57,7 @@ class ImageManager extends \yii\db\ActiveRecord {
 	 * @inheritdoc
 	 */
 	public static function tableName() {
-		return 'ImageManager';
+		return '{{%imagemanager}}';
 	}
 
     /**

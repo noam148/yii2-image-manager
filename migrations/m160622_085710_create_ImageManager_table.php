@@ -13,7 +13,7 @@ class m160622_085710_create_ImageManager_table extends Migration
     public function up()
     {
 		//ImageManager: create table
-        $this->createTable('ImageManager', [
+        $this->createTable('{{%imagemanager}}', [
             'id' => $this->primaryKey(),
 			'fileName' => $this->string(128)->notNull(),
 			'fileHash' => $this->string(32)->notNull(),
@@ -22,7 +22,7 @@ class m160622_085710_create_ImageManager_table extends Migration
         ]);
 		
 		//ImageManager: alter id column
-		$this->alterColumn('ImageManager', 'id', 'INT(10) UNSIGNED NOT NULL AUTO_INCREMENT');
+		$this->alterColumn('{{%imagemanager}}', 'id', 'INT(10) UNSIGNED NOT NULL AUTO_INCREMENT');
 
     }
 
@@ -31,6 +31,6 @@ class m160622_085710_create_ImageManager_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('ImageManager');
+        $this->dropTable('{{%imagemanager}}');
     }
 }
