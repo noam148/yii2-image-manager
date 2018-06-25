@@ -348,7 +348,13 @@ class ManagerController extends Controller {
 		$return['fileSize'] = $model->imageDetails['size'];
 		$return['dimensionWidth'] = $model->imageDetails['width'];
 		$return['dimensionHeight'] = $model->imageDetails['height'];
-		$return['image'] = \Yii::$app->imagemanager->getImagePath($model->id, 400, 400, "inset") . "?t=" . time();
+
+		$image_path = \Yii::$app->imagemanager->getImagePath($model->id, 400, 400, "inset");
+
+		if(strpos($image_path, '?') === FALSE)
+			$return['image'] = $image_path . "?t=" . time();
+		else
+			$return['image'] = $image_path . "&t=" . time();
 
 		//return json encoded
 		return $return;
