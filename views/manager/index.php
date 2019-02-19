@@ -33,7 +33,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 				</div>
 			</div> 
 		</div>
-		<div class="col-xs-6 col-sm-3 col-overview">
+		<div class="col-xs-6 col-sm-3 test col-overview">
 			<?php Pjax::begin([
 				'id'=>'pjax-mediamanager',
 				'timeout'=>'5000'
