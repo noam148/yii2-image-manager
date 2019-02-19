@@ -10,7 +10,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 ?>
 <div id="module-imagemanager" class="container-fluid <?=$selectType?>">
 	<div class="row">
-		<div class="col-xs-6 col-sm-10 col-image-editor">
+		<div class="col-xs-6 col-sm-9 col-image-editor">
 			<div class="image-cropper">
 				<div class="image-wrapper">
 					<img id="image-cropper" />
@@ -33,7 +33,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 				</div>
 			</div> 
 		</div>
-		<div class="col-xs-6 col-sm-10 col-overview">
+		<div class="col-xs-6 col-sm-3 col-overview">
 			<?php Pjax::begin([
 				'id'=>'pjax-mediamanager',
 				'timeout'=>'5000'
