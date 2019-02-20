@@ -10,12 +10,12 @@ The preferred way to install this extension is through [composer](http://getcomp
 * Either run
 
 ```
-php composer.phar require "noam148/yii2-image-manager" "*" 
+php composer.phar require "gromovfjodor/yii2-image-manager" "*" 
 ```
 or add
 
 ```json
-"noam148/yii2-image-manager" : "*"
+"gromovfjodor/yii2-image-manager" : "*"
 ```
 
 to the require section of your application's `composer.json` file.
