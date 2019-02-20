@@ -9,35 +9,62 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 ?>
 <div id="module-imagemanager" class="container <?=$selectType?>">
+
 	<div class="row">
+
 		<div class="col-6 col-sm-3 col-md-3 col-image-editor">
+
 			<div class="image-cropper">
+
 				<div class="image-wrapper">
+
 					<img id="image-cropper" />
+
 				</div>
+
 				<div class="action-buttons">
+
 					<a href="#" class="btn btn-primary apply-crop">
+
 						<i class="fa fa-crop"></i>
+
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
+
 					</a>
+
 					<?php if($viewMode === "iframe"): ?>
+
 					<a href="#" class="btn btn-primary apply-crop-select">
+
 						<i class="fa fa-crop"></i>
+
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop and select')?></span>
+
 					</a>
+
 					<?php endif; ?>
+
 					<a href="#" class="btn btn-default cancel-crop">
+
 						<i class="fa fa-undo"></i>
+
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
+
 					</a>
+
 				</div>
-			</div> 
+
+			</div>
+
 		</div>
+
 		<div class="col-6 col-sm-9 col-md-9 col-overview">
+
 			<?php Pjax::begin([
 				'id'=>'pjax-mediamanager',
 				'timeout'=>'5000'
-			]); ?>    
+			]); ?>
+
 			<?= ListView::widget([
 				'dataProvider' => $dataProvider,
 				'itemOptions' => ['class' => 'item img-thumbnail'],
@@ -46,12 +73,18 @@ $this->title = Yii::t('imagemanager','Image manager');
 					return $this->render("_item", ['model' => $model]);
 				},
 			]) ?>
+
 			<?php Pjax::end(); ?>
+
 		</div>
+
 		<div class="col-6 col-sm-3 col-options">
+
 			<div class="form-group">
+
 				<?=Html::textInput('input-mediamanager-search', null, ['id'=>'input-mediamanager-search', 'class'=>'form-control', 'placeholder'=>Yii::t('imagemanager','Search').'...'])?>
-			</div>
+
+            </div>
 
 			<?php
 				if (Yii::$app->controller->module->canUploadImage):
@@ -90,20 +123,34 @@ $this->title = Yii::t('imagemanager','Image manager');
 			?>
 
 			<div class="image-info hide">
+
 				<div class="thumbnail">
+
 					<img src="#">
+
 				</div>
+
 				<div class="edit-buttons">
+
 					<a href="#" class="btn btn-primary btn-block crop-image-item">
+
 						<i class="fa fa-crop"></i>
+
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
+
 					</a>
+
 				</div>
+
 				<div class="details">
+
 					<div class="fileName"></div>
+
 					<div class="created"></div>
+
 					<div class="fileSize"></div>
-					<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>
+
+					<!--<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>-->
 					<?php
 						if (Yii::$app->controller->module->canRemoveImage):
 					?>
@@ -111,11 +158,18 @@ $this->title = Yii::t('imagemanager','Image manager');
 					<?php
 						endif;
 					?>
+
 				</div>
+
 				<?php if($viewMode === "iframe"): ?>
-				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a> 
+
+				<a href="#" class="btn btn-primary btn-block pick-image-item"><?=Yii::t('imagemanager','Select')?></a>
+
 				<?php endif; ?>
 			</div>
-		</div>  
+
+		</div>
+
 	</div>
+
 </div>  
