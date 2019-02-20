@@ -8,7 +8,7 @@ use kartik\file\FileInput;
 $this->title = Yii::t('imagemanager','Image manager');
 
 ?>
-<div id="module-imagemanager" class="container-fluid <?=$selectType?>">
+<div id="module-imagemanager" class="test <?=$selectType?>">
 	<div class="row">
 		<div class="col-xs-6 col-sm-10 col-image-editor">
 			<div class="image-cropper">
