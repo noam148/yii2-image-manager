@@ -1,6 +1,6 @@
 <?php
 
-namespace noam148\imagemanager;
+namespace gromovfjodor\imagemanager;
 
 use Yii;
 use yii\base\UnknownClassException;
@@ -57,7 +57,7 @@ class Module extends \yii\base\Module {
 			Yii::$app->i18n->translations['imagemanager'] = [
 				'class' => 'yii\i18n\PhpMessageSource',
 				'sourceLanguage' => 'en',
-				'basePath' => '@noam148/imagemanager/messages'
+				'basePath' => '@gromovfjodor/imagemanager/messages'
 			];
 		}
 		//check extensions

@@ -42,7 +42,7 @@ class ImageManagerInputWidget extends InputWidget {
             Yii::$app->i18n->translations['imagemanager'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
-                'basePath' => '@noam148/imagemanager/messages'
+                'basePath' => '@gromovfjodor/imagemanager/messages'
             ];
         }
     }
