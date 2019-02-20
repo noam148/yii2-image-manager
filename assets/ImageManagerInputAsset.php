@@ -1,5 +1,5 @@
 <?php
-namespace noam148\imagemanager\assets;
+namespace gromovfjodor\imagemanager\assets;
 use yii\web\AssetBundle;
 
 /**

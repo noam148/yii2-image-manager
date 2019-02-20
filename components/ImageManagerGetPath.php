@@ -1,10 +1,10 @@
 <?php
 
-namespace noam148\imagemanager\components;
+namespace gromovfjodor\imagemanager\components;
 
 use Yii;
 use yii\base\Component;
-use noam148\imagemanager\models\ImageManager;
+use gromovfjodor\imagemanager\models\ImageManager;
 use yii\base\InvalidConfigException;
 use yii\db\Connection;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace noam148\imagemanager\models;
+namespace gromovfjodor\imagemanager\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use noam148\imagemanager\models\ImageManager;
-use noam148\imagemanager\Module;
+use gromovfjodor\imagemanager\models\ImageManager;
+use gromovfjodor\imagemanager\Module;
 
 /**
  * ImageManagerSearch represents the model behind the search form about `common\modules\imagemanager\models\ImageManager`.
