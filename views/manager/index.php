@@ -150,15 +150,15 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				<div class="details">
 
-                    <h4 style="details__title"><span><?=Yii::t('imagemanager','Details text')?></span></h4>
+                    <h4 class="details__title"><?=Yii::t('imagemanager','Details text')?></h4>
 
                     <ul class="details__list">
 
-                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File name')?>:</span><span class="fileName"></span></li>
+                        <li class="details__item"><span class="details__subtitle"><?=Yii::t('imagemanager','File name')?>: </span><span class="fileName"></span></li>
 
-                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File create')?>:</span><span class="created"></span></li>
+                        <li class="details__item"><span class="details__subtitle"><?=Yii::t('imagemanager','File create')?>: </span><span class="created"></span></li>
 
-                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File size')?>:</span><span class="fileSize"></span></li>
+                        <li class="details__item"><span class="details__subtitle"><?=Yii::t('imagemanager','File size')?>: </span><span class="fileSize"></span></li>
 
                     </ul>
 
