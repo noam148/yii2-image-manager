@@ -20,15 +20,16 @@
 /*options*/
 #module-imagemanager > .row .col-options{ padding-right: 0; }
 /*File upload*/
+#module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
 #module-imagemanager > .row .col-options .form-group .file-input .input-group,
-#module-imagemanager > .row .col-options .form-group .file-input .input-group .input-group-btn{ float: left; }
-#module-imagemanager > .row .col-options .form-group .btn-add-flyleaf{ float: left; }
 /*details*/
 #module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
 #module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; background: #dadada; }
-#module-imagemanager > .row .col-options .image-info .edit-buttons{ margin-bottom: 10px; }
+#module-imagemanager > .row .col-options .image-info .thumbnail img{ width: 100%; background: #dadada; }
+#module-imagemanager > .row .col-options .image-info .edit-buttons{ display: flex; margin-bottom: 10px; }
+#module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 5px}
 #module-imagemanager > .row .col-options .image-info .details{}
 #module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #module-imagemanager > .row .col-options .image-info .pick-image-item{ margin-top: 10px; }
