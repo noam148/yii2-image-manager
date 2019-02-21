@@ -86,6 +86,42 @@ $this->title = Yii::t('imagemanager','Image manager');
 
             </div>
 
+			<?php
+				if (Yii::$app->controller->module->canUploadImage):
+			?>
+
+			<?=FileInput::widget([
+				'name' => 'imagemanagerFiles[]',
+				'id' => 'imagemanager-files',
+				'options' => [
+					'multiple' => true,
+					'accept' => 'image/*'
+				],
+				'pluginOptions' => [
+					'uploadUrl' => Url::to(['manager/upload']),
+					'allowedFileExtensions' => \Yii::$app->controller->module->allowedFileExtensions,
+					'uploadAsync' => false,
+					'showPreview' => false,
+					'showRemove' => false,
+					'showUpload' => false,
+					'showCancel' => false,
+					'browseClass' => 'btn btn-primary btn-block',
+					'browseIcon' => '<i class="fa fa-upload"></i> ',
+					'browseLabel' => Yii::t('imagemanager','Upload')
+				],
+				'pluginEvents' => [
+					"filebatchselected" => "function(event, files){  $('.msg-invalid-file-extension').addClass('hide'); $(this).fileinput('upload'); }",
+					"filebatchuploadsuccess" => "function(event, data, previewId, index) {
+						imageManagerModule.uploadSuccess(data.jqXHR.responseJSON.imagemanagerFiles);
+					}",
+					"fileuploaderror" => "function(event, data) { $('.msg-invalid-file-extension').removeClass('hide'); }",
+				],
+			]) ?>
+
+			<?php
+				endif;
+			?>
+
 			<div class="image-info hide">
 
 				<div class="thumbnail">
@@ -94,41 +130,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				</div>
 
-             	<div class="edit-buttons">
-
-                    <?php if (Yii::$app->controller->module->canUploadImage): ?>
-
-                        <?=FileInput::widget([
-                            'name' => 'imagemanagerFiles[]',
-                            'id' => 'imagemanager-files',
-                            'options' => [
-                                'multiple' => true,
-                                'accept' => 'image/*'
-                            ],
-                            'pluginOptions' => [
-                                'uploadUrl' => Url::to(['manager/upload']),
-                                'allowedFileExtensions' => \Yii::$app->controller->module->allowedFileExtensions,
-                                'uploadAsync' => false,
-                                'showPreview' => false,
-                                'showRemove' => false,
-                                'showUpload' => false,
-                                'showCancel' => false,
-                                'browseClass' => 'btn btn-primary btn-block',
-                                'browseIcon' => '<i class="fa fa-upload"></i> ',
-                                'browseLabel' => Yii::t('imagemanager','Upload')
-                            ],
-                            'pluginEvents' => [
-                                "filebatchselected" => "function(event, files){  $('.msg-invalid-file-extension').addClass('hide'); $(this).fileinput('upload'); }",
-                                "filebatchuploadsuccess" => "function(event, data, previewId, index) {
-						imageManagerModule.uploadSuccess(data.jqXHR.responseJSON.imagemanagerFiles);
-					}",
-                                "fileuploaderror" => "function(event, data) { $('.msg-invalid-file-extension').removeClass('hide'); }",
-                            ],
-                        ]) ?>
-
-                    <?php
-                        endif;
-                    ?>
+				<div class="edit-buttons">
 
 					<a href="#" class="btn btn-primary btn-block crop-image-item">
 
@@ -138,26 +140,23 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 					</a>
 
+                    <?php if (Yii::$app->controller->module->canRemoveImage):  ?>
+                        <a href="#" class="btn btn-xs btn-danger delete-image-item" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <?=Yii::t('imagemanager','Delete')?></a>
+                    <?php
+                         endif;
+                    ?>
+
 				</div>
 
 				<div class="details">
 
-                    <strong><?=Yii::t('imagemanager','Details_text')?></strong>
+					<div class="fileName"></div>
 
-                    <span><?=Yii::t('imagemanager','File_name')?></span><div class="fileName"></div>
+					<div class="created"></div>
 
-                    <span><?=Yii::t('imagemanager','File_create')?></span><div class="created"></div>
-
-                    <span><?=Yii::t('imagemanager','File_size')?></span><div class="fileSize"></div>
+					<div class="fileSize"></div>
 
 					<!--<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>-->
-					<?php
-						if (Yii::$app->controller->module->canRemoveImage):
-					?>
-						<a href="#" class="btn btn-xs btn-danger delete-image-item" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <?=Yii::t('imagemanager','Delete')?></a>
-					<?php
-						endif;
-					?>
 
 				</div>
 
@@ -171,5 +170,5 @@ $this->title = Yii::t('imagemanager','Image manager');
 		</div>
 
 	</div>
-    
-</div>  
+
+</div>
