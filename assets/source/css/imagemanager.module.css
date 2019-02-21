@@ -5,7 +5,8 @@
 #module-imagemanager.ckeditor{ padding: 15px; }
 
 /*overview*/
-#module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; height: 100%; overflow: auto; }
+#module-imagemanager > .row{height:100%}
+#module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; height: 100%; overflow: auto; flex-grow:1 }
 #module-imagemanager > .row .col-overview .item-overview{ width:100%; display:flex; flex-wrap:wrap; max-height: 500px; overflow: auto; }
 #module-imagemanager > .row .col-overview .item-overview .item{ position: relative; overflow: hidden; width: 128px; height: 128px; margin:5px; cursor: pointer; }
 #module-imagemanager > .row .col-overview .item-overview .item.selected{ border:4px solid #00ac24; }
