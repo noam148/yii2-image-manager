@@ -124,7 +124,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				</div>
 
-				<div class="edit-buttons">
+				<div class="edit-buttons js-edit-buttons">
 
 					<a href="#" class="btn btn-primary btn-block crop-image-item"><?=Yii::t('imagemanager','Crop')?></a>
 
