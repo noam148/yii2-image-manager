@@ -3,7 +3,9 @@
 #module-imagemanager > .row{ margin: 0; }
 #module-imagemanager.tinymce,
 #module-imagemanager.ckeditor{ padding: 15px; }
-
+/*seacrh*/
+#module-imagemanager .col-options .form-group{position:relative}
+#module-imagemanager .col-options .form-group:after{content: "\f100"; font-family:Flaticon; position:absolute; right:0 }
 /*overview*/
 #module-imagemanager > .row{height:100%}
 #module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; height: 100%; overflow: auto; flex-grow:1 }
@@ -21,11 +23,12 @@
 /*options*/
 #module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem; border-left:1px solid #ddd}
 /*File upload*/
+#imagemanager-files{cursor:pointer}
 #module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
 /*details*/
-#module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail{ margin:1rem 0; padding:1rem 0; font-size:0; border-top:1px solid #ddd; text-align: center; line-height: 200px; height:200px; overflow:hidden; border:1px solid #000}
+#module-imagemanager > .row .col-options .image-info{margin:1rem 0; padding:1rem 0; border-top:1px solid #ddd;}
+#module-imagemanager > .row .col-options .image-info .thumbnail{font-size:0; text-align: center; line-height: 200px; height:200px; overflow:hidden; border:1px solid #000}
 #module-imagemanager > .row .col-options .image-info .thumbnail img{ width: 100%; background: #dadada}
 #module-imagemanager > .row .col-options .image-info .edit-buttons{ display: flex; margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
