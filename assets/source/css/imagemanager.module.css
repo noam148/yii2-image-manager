@@ -16,7 +16,7 @@
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ width:100%; max-height: 118px; background: #dadada; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail .filename{ background-color: rgba(255, 255, 255, 0.9); position: absolute; bottom: 4px; left: 4px; right: 4px; max-height: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px; }
 /*edit column*/
-#module-imagemanager > .row .col-image-editor{max-height: 460px; padding:1rem;flex-grow: 1}
+#module-imagemanager > .row .col-image-editor{max-height: 460px; padding:1rem; flex-grow: 1}
 /*cropper*/
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; margin-bottom:1rem}
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
