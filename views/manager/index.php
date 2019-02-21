@@ -12,7 +12,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 	<div class="row">
 
-		<div class="col-6 col-sm-3 col-md-3 col-image-editor">
+		<div class="col-image-editor">
 
 			<div class="image-cropper">
 
@@ -58,7 +58,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 		</div>
 
-		<div class="col-6 col-sm-9 col-md-9 col-overview">
+		<div class="col-overview">
 
 			<?php Pjax::begin([
 				'id'=>'pjax-mediamanager',
@@ -126,7 +126,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				<div class="thumbnail">
 
-					<img src="assets/source/img/img_no-image.png">
+					<img src="/vendor/gromovfjodor/yii2-image-manager/assets/source/img/img_no-image.png">
 
 				</div>
 
@@ -152,13 +152,17 @@ $this->title = Yii::t('imagemanager','Image manager');
 
                     <h4 style="details__title"><span><?=Yii::t('imagemanager','Details text')?></span></h4>
 
-                    <span style="details__subtitle"><?=Yii::t('imagemanager','File name')?>:</span><span class="fileName"></span>
+                    <ul class="details__list">
 
-                    <span style="details__subtitle"><?=Yii::t('imagemanager','File create')?>:</span><span class="created"></span>
+                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File name')?>:</span><span class="fileName"></span></li>
 
-                    <span style="details__subtitle"><?=Yii::t('imagemanager','File size')?>:</span><span class="fileSize"></span>
+                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File create')?>:</span><span class="created"></span></li>
 
-					<!--<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>-->
+                        <li class="details__item"><span style="details__subtitle"><?=Yii::t('imagemanager','File size')?>:</span><span class="fileSize"></span></li>
+
+                    </ul>
+
+                    <!--<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>-->
 
 				</div>
 
