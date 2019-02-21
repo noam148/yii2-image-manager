@@ -30,7 +30,7 @@
 #module-imagemanager > .row .col-options .image-info .edit-buttons{ display: flex; margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
-#module-imagemanager > .row .col-options .image-info .details{}
+#module-imagemanager > .row .col-options .image-info .details{display:none}
 #module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #module-imagemanager > .row .col-options .image-info .pick-image-item{ margin-top: 10px; }
 

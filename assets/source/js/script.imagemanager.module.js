@@ -328,6 +328,11 @@ $(document).ready(function () {
 	$( document ).on("keyup change", "#input-mediamanager-search", function() {
 		imageManagerModule.filterImageResult($(this).val());
 	});
+
+	//custom function
+	$('.img-thumbnail').click(function(){
+		$('.details').fadeIn(500);
+	});
 	
 });
 
