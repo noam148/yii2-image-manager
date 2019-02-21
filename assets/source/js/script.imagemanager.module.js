@@ -331,7 +331,6 @@ $(document).ready(function () {
 
 	//custom function
 	$('.img-thumbnail').click(function(){
-		$('.edit-buttons').removeClass('.js-edit-buttons');
 		$('.details').fadeIn(500);
 	});
 	
