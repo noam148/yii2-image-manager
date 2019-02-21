@@ -13,5 +13,9 @@ return [
 	'Search' => 'Поиск',
 	'Select' => 'Выбрать',
 	'Image manager' => 'Менеджер изображений',
-    'Upload' => 'Загрузить'
+    'Upload' => 'Загрузить',
+    'Details_text' => 'Параметры изображения',
+    'File_name' => 'Имя файла',
+    'File_create' => 'Создан',
+    'File_size' => 'Размер файла'
 ];
