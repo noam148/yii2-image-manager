@@ -18,7 +18,7 @@
 /*edit column*/
 #module-imagemanager > .row .col-image-editor{ padding-left: 0; flex-grow:1; display: none; }
 /*cropper*/
-#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; margin-bottom:1rem }
+#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; margin-bottom:1rem}
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
 #module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem; border-left:1px solid #ddd}
