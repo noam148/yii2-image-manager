@@ -40,7 +40,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 					<?php endif; ?>
 
-					<a href="#" class="btn btn-default cancel-crop">
+					<a href="#" class="btn btn-xs btn-danger cancel-crop">
 
 				    	<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
 
@@ -100,7 +100,6 @@ $this->title = Yii::t('imagemanager','Image manager');
 					'showUpload' => false,
 					'showCancel' => false,
 					'browseClass' => 'btn btn-primary btn-block',
-					'browseIcon' => '<i class="fa fa-upload"></i> ',
 					'browseLabel' => Yii::t('imagemanager','Upload')
 				],
 				'pluginEvents' => [
