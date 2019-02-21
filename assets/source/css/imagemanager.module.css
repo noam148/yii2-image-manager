@@ -25,7 +25,7 @@
 #module-imagemanager > .row .col-options .form-group .file-input .input-group,
 /*details*/
 #module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; display:flex; height:200px; overflow:hidden; border:1px solid #000}
+#module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; font-size:0; text-align: center; line-height: 200px; height:200px; overflow:hidden; border:1px solid #000}
 #module-imagemanager > .row .col-options .image-info .thumbnail img{ width: 100%; background: #dadada}
 #module-imagemanager > .row .col-options .image-info .edit-buttons{ display: flex; margin-bottom: 10px; }
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
