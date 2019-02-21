@@ -14,8 +14,7 @@ return [
 	'Select' => 'Выбрать',
 	'Image manager' => 'Менеджер изображений',
     'Upload' => 'Загрузить',
-    'Details_text' => 'Параметры изображения',
-    'File_name' => 'Имя файла',
-    'File_create' => 'Создан',
-    'File_size' => 'Размер файла'
+    'Details text' => 'Параметры изображения',
+    'File create' => 'Создан',
+    'File size' => 'Размер файла'
 ];
