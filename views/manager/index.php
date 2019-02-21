@@ -26,8 +26,6 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 					<a href="#" class="btn btn-primary apply-crop">
 
-						<i class="fa fa-crop"></i>
-
 						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop')?></span>
 
 					</a>
@@ -36,9 +34,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 					<a href="#" class="btn btn-primary apply-crop-select">
 
-						<i class="fa fa-crop"></i>
-
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Crop and select')?></span>
+					    	<span class="hidden-xs"><?=Yii::t('imagemanager','Crop and select')?></span>
 
 					</a>
 
@@ -46,9 +42,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 					<a href="#" class="btn btn-default cancel-crop">
 
-						<i class="fa fa-undo"></i>
-
-						<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
+				    	<span class="hidden-xs"><?=Yii::t('imagemanager','Cancel')?></span>
 
 					</a>
 

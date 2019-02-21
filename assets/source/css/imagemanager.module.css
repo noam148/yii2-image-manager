@@ -22,6 +22,7 @@
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
 #module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem; border-left:1px solid #ddd}
+#module-imagemanager > .row .col-options .file-input:before{content: "\f149"; font-family:Flaticon; margin-right:.2rem}
 /*File upload*/
 #imagemanager-files{cursor:pointer}
 #module-imagemanager  .file-caption-main{justify-content:flex-end}
@@ -34,7 +35,7 @@
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item:before{content: "\f148"; font-family:Flaticon; margin-right:.2rem}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
-#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{content: "\f102"; font-family:Flaticon; margin-:2rem}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item:before{content: "\f102"; font-family:Flaticon; margin-right:2rem}
 #module-imagemanager > .row .col-options .image-info .details{display:none; border-top:1px solid #ddd; margin:1rem 0; padding:1rem 0}
 #module-imagemanager > .row .col-options .image-info .details__list{margin: 0; padding:0; list-style:none}
 #module-imagemanager > .row .col-options .image-info .details__title{font-size:1rem; text-align: center;}
