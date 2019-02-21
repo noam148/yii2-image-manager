@@ -16,7 +16,7 @@
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ width:100%; max-height: 118px; background: #dadada; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail .filename{ background-color: rgba(255, 255, 255, 0.9); position: absolute; bottom: 4px; left: 4px; right: 4px; max-height: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px; }
 /*edit column*/
-#module-imagemanager > .row .col-image-editor{max-height: 460px; padding:1rem; flex-grow: 1}
+#module-imagemanager > .row .col-image-editor{ padding-left: 0; flex-grow:1; display: none; }
 /*cropper*/
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; margin-bottom:1rem}
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
@@ -26,7 +26,6 @@
 #imagemanager-files{cursor:pointer}
 #module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
-#imagemanager-files .btn-file:before{content: "\f149"; font-family:Flaticon; margin-right:.2rem}
 /*details*/
 #module-imagemanager > .row .col-options .image-info{margin:1rem 0; padding:1rem 0; border-top:1px solid #ddd;}
 #module-imagemanager > .row .col-options .image-info .thumbnail{font-size:0; margin-bottom:1rem; text-align: center; line-height: 200px; height:200px; overflow:hidden; border:1px solid #000}
@@ -35,7 +34,7 @@
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item:before{content: "\f148"; font-family:Flaticon; margin-right:.2rem}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
-#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item:before{content: "\f102"; font-family:Flaticon; margin-right:.2rem}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{content: "\f102"; font-family:Flaticon; margin-:2rem}
 #module-imagemanager > .row .col-options .image-info .details{display:none; border-top:1px solid #ddd; margin:1rem 0; padding:1rem 0}
 #module-imagemanager > .row .col-options .image-info .details__list{margin: 0; padding:0; list-style:none}
 #module-imagemanager > .row .col-options .image-info .details__title{font-size:1rem; text-align: center;}
