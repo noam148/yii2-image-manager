@@ -18,7 +18,7 @@
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; }
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
-#module-imagemanager > .row .col-options{ padding-right: 0; }
+#module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem .5rem}
 /*File upload*/
 #module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
@@ -31,7 +31,9 @@
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
 #module-imagemanager > .row .col-options .image-info .details{display:none}
-#module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#module-imagemanager > .row .col-options .image-info .details__title{font-size:1rem; text-align: center;}
+#module-imagemanager > .row .col-options .image-info .details__subtitle{font-weight: bold}
+#module-imagemanager > .row .col-options .image-info .details .fileName{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #module-imagemanager > .row .col-options .image-info .pick-image-item{ margin-top: 10px; }
 
 #module-imagemanager a.delete-image-item { margin-top: 5px; }

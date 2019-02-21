@@ -150,13 +150,13 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				<div class="details">
 
-                    <h4><span class="hidden-xs"><?=Yii::t('imagemanager','Details text')?></span></h4>
+                    <h4 style="details__title"><span><?=Yii::t('imagemanager','Details text')?></span></h4>
 
-                    <?=Yii::t('imagemanager','File name')?>:</span><div class="fileName"></div>
+                    <span style="details__subtitle"><?=Yii::t('imagemanager','File name')?>:</span><span class="fileName"></span>
 
-                    <?=Yii::t('imagemanager','File create')?>:</span><div class="created"></div>
+                    <span style="details__subtitle"><?=Yii::t('imagemanager','File create')?>:</span><span class="created"></span>
 
-                    <?=Yii::t('imagemanager','File size')?>:</span><div class="fileSize"></div>
+                    <span style="details__subtitle"><?=Yii::t('imagemanager','File size')?>:</span><span class="fileSize"></span>
 
 					<!--<div class="dimensions"><span class="dimension-width"></span> &times; <span class="dimension-height"></span></div>-->
 
