@@ -1,5 +1,5 @@
 /*CSS for module*/
-#module-imagemanager{ padding-left: 0; padding-right: 0; }
+#module-imagemanager{ width:100%; padding-left: 0; padding-right: 0}
 #module-imagemanager > .row{ margin: 0; }
 #module-imagemanager.tinymce,
 #module-imagemanager.ckeditor{ padding: 15px; }
@@ -7,7 +7,7 @@
 /*overview*/
 #module-imagemanager > .row{height:100%}
 #module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; height: 100%; overflow: auto; flex-grow:1 }
-#module-imagemanager > .row .col-overview .item-overview{ width:100%; display:flex; flex-wrap:wrap; max-height: 500px; overflow: auto; }
+#module-imagemanager > .row .col-overview .item-overview{ width:100%; display:flex; flex-wrap:wrap; max-height: 500px; padding:1rem; overflow: auto; }
 #module-imagemanager > .row .col-overview .item-overview .item{ position: relative; overflow: hidden; width: 128px; height: 128px; margin:5px; cursor: pointer; }
 #module-imagemanager > .row .col-overview .item-overview .item.selected{ border:4px solid #00ac24; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail{ margin-bottom: 0; }
@@ -19,7 +19,7 @@
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; }
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
-#module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem .5rem; border-left:1px solid #ddd}
+#module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem; border-left:1px solid #ddd}
 /*File upload*/
 #module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
