@@ -119,7 +119,7 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				<div class="thumbnail">
 
-					<img src="/vendor/gromovfjodor/yii2-image-manager/assets/source/img/img_no-image.png">
+					<img src="images/img_no-image.png" alt="Изображение">
 
 				</div>
 
