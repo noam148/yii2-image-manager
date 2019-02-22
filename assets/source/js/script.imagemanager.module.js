@@ -332,6 +332,7 @@ $(document).ready(function () {
 	//custom function
 	$('.img-thumbnail').click(function(){
 		$('.details').fadeIn(500);
+		$('.crop-image-item, .delete-image-item').removeAttr('disabled');
 	});
 	
 });

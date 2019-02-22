@@ -125,10 +125,10 @@ $this->title = Yii::t('imagemanager','Image manager');
 
 				<div class="edit-buttons js-edit-buttons">
 
-					<button class="btn btn-primary btn-block crop-image-item"><?=Yii::t('imagemanager','Crop')?></button>
+					<button class="btn btn-primary btn-block crop-image-item" disabled><?=Yii::t('imagemanager','Crop')?></button>
 
                     <?php if (Yii::$app->controller->module->canRemoveImage):  ?>
-                    <button class="btn btn-xs btn-danger delete-image-item" ><?=Yii::t('imagemanager','Delete')?></button>
+                    <button class="btn btn-xs btn-danger delete-image-item" disabled><?=Yii::t('imagemanager','Delete')?></button>
                     <?php endif; ?>
 
 				</div>
