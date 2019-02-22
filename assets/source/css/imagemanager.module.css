@@ -46,3 +46,5 @@
 /*crop*/
 #module-imagemanager .apply-crop:before{content: "\f148"; font-family:Flaticon; margin-right:.2rem}
 #module-imagemanager  .cancel-crop:before{content: "\f12e"; font-family:Flaticon; margin-right:.2rem}
+/* empty */
+.empty{padding:1rem /* "Ничего не найдено" */}
