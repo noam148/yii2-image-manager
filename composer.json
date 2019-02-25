@@ -13,7 +13,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-		"gromovfjodor/yii2-image-resize" : "*",
+		"gromovfjodor/yii2-image-resize" : "1.0.0",
 		"kartik-v/yii2-widget-fileinput": "@dev"
     },
     "autoload": {
