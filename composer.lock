@@ -532,11 +532,11 @@
             "time": "2017-12-06T12:34:31+00:00"
         },
         {
-            "name": "noam148/yii2-image-resize",
+            "name": "gromovfjodor/yii2-image-resize",
             "version": "1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/noam148/yii2-image-resize.git",
+                "url": "https://github.com/gromovfjodor/yii2-image-resize.git",
                 "reference": "32c5adf7211e06cefc6861a2164855573e968038"
             },
             "dist": {
