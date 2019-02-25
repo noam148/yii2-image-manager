@@ -13,7 +13,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-		"noam148/yii2-image-resize" : "*",
+		"gromovfjodor/yii2-image-resize" : "*",
 		"kartik-v/yii2-widget-fileinput": "@dev"
     },
     "autoload": {
