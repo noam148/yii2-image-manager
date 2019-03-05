@@ -6,5 +6,5 @@ $this->title = "Image manager";
 	<p>Install run migrate:</p>
 	<p><code>yii migrate --migrationPath=@gromovfjodor/imagemanager/migrations</code></p>
 	
-	<p><em>By noam148</em></p>
+	<p><em>By gromovfjodor</em></p>
 </div>
