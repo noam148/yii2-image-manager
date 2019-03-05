@@ -79,12 +79,6 @@ class ImageManagerInputWidget extends InputWidget {
             $field .= Html::textInput($this->name . "_name", null, ['readonly' => true]);
             $field .= Html::hiddenInput($this->name, $this->value, $this->options);
         }
-        //end input group
-        $sHideClass = $ImageManager_id === null ? 'hide' : '';
-        $field .= "<a href='#' class='input-group-addon btn btn-primary delete-selected-image " . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'><i class='glyphicon glyphicon-remove' aria-hidden='true'></i></a>";
-        $field .= "<a href='#' class='input-group-addon btn btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
-        $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
-        $field .= "</a></div>";
 
         //show preview if is true
         if ($this->showPreview == true) {
@@ -95,6 +89,13 @@ class ImageManagerInputWidget extends InputWidget {
                     . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
                     . '</div>';
         }
+
+        //end input group
+        $sHideClass = $ImageManager_id === null ? 'hide' : '';
+        $field .= "<button class='input-group-addon btn btn-primary delete-selected-image " . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></button>";
+        $field .= "<button class='input-group-addon btn btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
+        $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
+        $field .= "</button></div>";
 
         //close image-manager-input div
         $field .= "</div>";
