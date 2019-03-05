@@ -69,15 +69,6 @@ class ImageManagerInputWidget extends InputWidget {
             $ImageManager_id = $this->model->{$sFieldAttributeName};
             $ImageManager_fileName = null;
             $mImageManager = ImageManager::findOne($ImageManager_id);
-            //show preview if is true
-            if ($this->showPreview == true) {
-                $sHideClass = ($mImageManager == null) ? "hide" : "";
-                $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
-
-                $field .= '<div class="image-wrapper ' . $sHideClass . '">'
-                    . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
-                    . '</div>';
-            }
             if ($mImageManager !== null) {
                 $ImageManager_fileName = $mImageManager->fileName;
             }
@@ -88,13 +79,22 @@ class ImageManagerInputWidget extends InputWidget {
             $field .= Html::textInput($this->name . "_name", null, ['readonly' => true]);
             $field .= Html::hiddenInput($this->name, $this->value, $this->options);
         }
-
         //end input group
         $sHideClass = $ImageManager_id === null ? 'hide' : '';
-        $field .= "<button class='input-group-addon btn btn-primary delete-selected-image " . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></button>";
-        $field .= "<button class='input-group-addon btn btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
+        $field .= "<span class='input-group-addon btn btn-primary delete-selected-image " . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'><i class='glyphicon glyphicon-remove' aria-hidden='true'></i></span>";
+        $field .= "<span class='input-group-addon btn btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
         $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
-        $field .= "</button></div>";
+        $field .= "</span></div>";
+
+        //show preview if is true
+        if ($this->showPreview == true) {
+            $sHideClass = ($mImageManager == null) ? "hide" : "";
+            $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
+
+            $field .= '<div class="image-wrapper ' . $sHideClass . '">'
+                    . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
+                    . '</div>';
+        }
 
         //close image-manager-input div
         $field .= "</div>";
