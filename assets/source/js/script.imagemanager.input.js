@@ -73,9 +73,6 @@ var imageManagerInput = {
 		$('#'+sImagePreviewId).attr("src","").parent().addClass("hide");	
 		//delete hide class
 		$(".delete-selected-image[data-input-id='"+inputId+"']").addClass("hide");
-		$(".delete-selected-image").on('click', function(){
-			alert('ok!');
-		})
 	}
 };
 
