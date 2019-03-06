@@ -334,11 +334,6 @@ $(document).ready(function () {
 		$('.details').fadeIn(500);
 		$('.crop-image-item, .delete-image-item').removeAttr('disabled');
 	});
-
-	//del image
-	$('.delete-selected-image').on(click, function(){
-		$('.image-wrapper.hide img').attr('src', '/images/img_no-image.png');
-	});
 	
 });
 
