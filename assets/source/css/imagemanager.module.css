@@ -37,7 +37,7 @@
 #module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item[disabled]{cursor:not-allowed}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
 #module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item:before{content: "\f102"; font-family:Flaticon; margin-right:.2rem}
-#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{cursor:not-allowed}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item[disabled]{cursor:not-allowed}
 #module-imagemanager > .row .col-options .image-info .details{display:none; border-top:1px solid #ddd; margin:1rem 0; padding:1rem 0}
 #module-imagemanager > .row .col-options .image-info .details__list{margin: 0; padding:0; list-style:none}
 #module-imagemanager > .row .col-options .image-info .details__title{font-size:1rem; text-align: center;}
