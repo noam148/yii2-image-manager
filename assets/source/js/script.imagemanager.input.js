@@ -70,7 +70,7 @@ var imageManagerInput = {
 		//trigger change
 		$('#'+sFieldId).trigger("change");
 		//hide image
-		$('#'+sImagePreviewId).attr("src","/test").parent().addClass("hide");
+		$('#'+sImagePreviewId).attr("src","/images/img_no-image.png").parent().addClass("hide");
 		//delete hide class
 		$(".delete-selected-image[data-input-id='"+inputId+"']").addClass("hide");
 	}
