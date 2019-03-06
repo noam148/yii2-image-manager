@@ -78,7 +78,7 @@ class ImageManagerInputWidget extends InputWidget {
                 $sHideClass = ($mImageManager == null) ? "hide" : "";
                 $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
 
-                $field .= '<div class="image-wrapper ' . $sHideClass . '">'
+                $field .= '<div class="image-wrapper col-12 ' . $sHideClass . '">'
                     . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
                     . '</div>';
             }
