@@ -81,7 +81,7 @@ class ImageManagerInputWidget extends InputWidget {
         }
         //end input group
         $sHideClass = $ImageManager_id === null ? 'hide' : '';
-        $field .= "<span class='input-group-addon btn btn-clear btn-danger delete-selected-image " . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></span>";
+        $field .= "<span class='input-group-addon btn btn-clear btn-danger delete-selected-image" . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></span>";
         $field .= "<span class='input-group-addon btn btn-add btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
         $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
         $field .= "</span></div>";

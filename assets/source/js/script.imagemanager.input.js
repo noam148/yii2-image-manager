@@ -51,7 +51,7 @@ var imageManagerInput = {
 	closeModal: function(){
 		$("#modal-imagemanager").modal("hide");
 	},
-	//delete picked image
+	//delete picked image 
 	deletePickedImage: function(inputId){
 		//remove value of the input field
 		var sFieldId = inputId;
