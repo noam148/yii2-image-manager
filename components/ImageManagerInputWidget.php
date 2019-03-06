@@ -72,6 +72,17 @@ class ImageManagerInputWidget extends InputWidget {
             if ($mImageManager !== null) {
                 $ImageManager_fileName = $mImageManager->fileName;
             }
+
+            //show preview if is true
+            if ($this->showPreview == true) {
+                $sHideClass = ($mImageManager == null) ? "hide" : "";
+                $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
+
+                $field .= '<div class="image-wrapper ' . $sHideClass . '">'
+                    . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
+                    . '</div>';
+            }
+
             //create field
             $field .= Html::textInput($this->attribute, $ImageManager_fileName, ['class' => 'form-control', 'id' => $sFieldNameId, 'readonly' => true]);
             $field .= Html::activeHiddenInput($this->model, $this->attribute, $this->options);
@@ -85,16 +96,6 @@ class ImageManagerInputWidget extends InputWidget {
         $field .= "<span class='input-group-addon btn btn-open btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
         $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
         $field .= "</span></div>";
-
-        //show preview if is true
-        if ($this->showPreview == true) {
-            $sHideClass = ($mImageManager == null) ? "hide" : "";
-            $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
-
-            $field .= '<div class="image-wrapper ' . $sHideClass . '">'
-                    . '<img id="' . $sFieldId . '_image" alt="Thumbnail" class="img-responsive img-preview" src="' . $sImageSource . '">'
-                    . '</div>';
-        }
 
         //close image-manager-input div
         $field .= "</div>";
