@@ -5,3 +5,4 @@
 .input-group-addon.btn, .input-group-addon.btn:before{margin-right:0; border-radius:0}
 .image-manager-input .image-wrapper{ border: 1px solid #ddd; border-radius:0; text-align:center; display: inline-block; padding: 4px; background: #FFF; }
 .image-manager-input .image-wrapper .img-preview{ background: #dadada; max-width: 100%; max-height: 200px; height: 100%; line-height: 1.42857; }
+.image-manager-input .input-group .form-control{border:0; height:43px !important}
