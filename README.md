@@ -1,3 +1,6 @@
+Sorry the module is no longer maintained anymore
+------------------------------------------------
+
 Image manager for Yii2
 ========================
 
@@ -136,5 +139,3 @@ echo $form->field($model, 'text')->widget(TinyMce::className(), [
 	]
 ]);
 ```	
-
-**If you got questions, tips or feedback? Please, let me know!**
