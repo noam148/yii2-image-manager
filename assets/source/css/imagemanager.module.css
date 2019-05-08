@@ -1,36 +1,52 @@
 /*CSS for module*/
-#module-imagemanager{ padding-left: 0; padding-right: 0; }
+#module-imagemanager{ width:100%; padding-left: 0; padding-right: 0}
 #module-imagemanager > .row{ margin: 0; }
 #module-imagemanager.tinymce,
 #module-imagemanager.ckeditor{ padding: 15px; }
-
+/*seacrh*/
+#module-imagemanager .col-options .form-group{position:relative}
+#module-imagemanager .col-options .form-group:after{content: "\f100"; font-family:Flaticon; position:absolute; right: 10px; top: 4px; font-size: 1.2rem;}
 /*overview*/
-#module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; border-right: 1px solid #ddd; height: 100%; overflow: auto; }
-#module-imagemanager > .row .col-overview .item-overview{ max-height: 500px; overflow: auto; }
-#module-imagemanager > .row .col-overview .item-overview .item{ position: relative; overflow: hidden; width: 128px; height: 128px; cursor: pointer; }
-#module-imagemanager > .row .col-overview .item-overview .item.selected{ background: #00ac24; }
+#module-imagemanager > .row{height:100%}
+#module-imagemanager > .row .col-overview{ padding-left: 0; padding-right: 0; height: 100%; overflow: auto; flex-grow:1 }
+#module-imagemanager > .row .col-overview .item-overview{ width:100%; display:flex; flex-wrap:wrap; max-height: 500px; padding:1rem; overflow: auto; }
+#module-imagemanager > .row .col-overview .item-overview .item{ position: relative; overflow: hidden; width: 128px; height: 128px; margin:5px; cursor: pointer; }
+#module-imagemanager > .row .col-overview .item-overview .item.selected{ border:4px solid #00ac24; }
 #module-imagemanager > .row .col-overview .item-overview .item .thumbnail{ margin-bottom: 0; }
-#module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ max-height: 118px; background: #dadada; }
-#module-imagemanager > .row .col-overview .item-overview .item .thumbnail .filename{ background-color: rgba(255, 255, 255, 0.9); position: absolute; bottom: 4px; left: 4px; right: 4px; max-height: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px; }
+#module-imagemanager > .row .col-overview .item-overview .item .thumbnail img{ width:100%; max-height: 118px; background: #dadada; }
+#module-imagemanager > .row .col-overview .item-overview .item .thumbnail .filename{ background-color: rgba(255, 255, 255, 0.9); position: absolute; bottom: 4px; left: 4px; right: 4px; max-height: 100%; text-align:center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px; }
 /*edit column*/
-#module-imagemanager > .row .col-image-editor{ padding-left: 0; display: none; }
+#module-imagemanager > .row .col-image-editor{ padding:1rem; flex-grow:1; display: none; }
 /*cropper*/
-#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{ max-height: 460px; }
+#module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper{max-height: 460px; margin-bottom:1rem}
 #module-imagemanager > .row .col-image-editor .image-cropper .image-wrapper img#image-cropper{ max-width: 100%; }
 /*options*/
-#module-imagemanager > .row .col-options{ padding-right: 0; }
+#module-imagemanager > .row .col-options{ padding-right: 0; min-width:320px; height:100%; padding:1rem; border-left:1px solid #ddd}
+#module-imagemanager > .row .col-options .btn-file:before{content: "\f149"; font-family:Flaticon; margin-right:.2rem}
 /*File upload*/
+#imagemanager-files{cursor:pointer}
+#module-imagemanager  .file-caption-main{justify-content:flex-end}
 #module-imagemanager > .row .col-options .file-input .form-control{ display: none; }
-#module-imagemanager > .row .col-options .form-group .file-input .input-group,
-#module-imagemanager > .row .col-options .form-group .file-input .input-group .input-group-btn{ float: left; }
-#module-imagemanager > .row .col-options .form-group .btn-add-flyleaf{ float: left; }
 /*details*/
-#module-imagemanager > .row .col-options .image-info{ margin-top: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail{ margin-bottom: 10px; }
-#module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; background: #dadada; }
-#module-imagemanager > .row .col-options .image-info .edit-buttons{ margin-bottom: 10px; }
-#module-imagemanager > .row .col-options .image-info .details{}
-#module-imagemanager > .row .col-options .image-info .details .fileName{ font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#module-imagemanager > .row .col-options .image-info{margin:1rem 0; padding:1rem 0; border-top:1px solid #ddd;}
+#module-imagemanager > .row .col-options .image-info .thumbnail{font-size:0; margin-bottom:1rem; text-align: center; line-height: 200px; height:200px; overflow:hidden; outline:1px solid #000}
+#module-imagemanager > .row .col-options .image-info .thumbnail img{ max-width: 100%; height:100%; background: #dadada}
+#module-imagemanager > .row .col-options .image-info .edit-buttons{ display: flex; margin-bottom: 10px; }
+#module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item{width:50%; margin:0 5px 0 0}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item:before{content: "\f148"; font-family:Flaticon; margin-right:.2rem}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .crop-image-item[disabled]{cursor:not-allowed}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item{width:50%; margin:0 0 0 5px}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item:before{content: "\f102"; font-family:Flaticon; margin-right:.2rem}
+#module-imagemanager > .row .col-options .image-info .edit-buttons .delete-image-item[disabled]{cursor:not-allowed}
+#module-imagemanager > .row .col-options .image-info .details{display:none; border-top:1px solid #ddd; margin:1rem 0; padding:1rem 0}
+#module-imagemanager > .row .col-options .image-info .details__list{margin: 0; padding:0; list-style:none}
+#module-imagemanager > .row .col-options .image-info .details__title{font-size:1rem; text-align: center;}
+#module-imagemanager > .row .col-options .image-info .details__subtitle{font-weight: bold}
+#module-imagemanager > .row .col-options .image-info .details .fileName{overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 #module-imagemanager > .row .col-options .image-info .pick-image-item{ margin-top: 10px; }
-
 #module-imagemanager a.delete-image-item { margin-top: 5px; }
+/*crop*/
+#module-imagemanager .apply-crop:before{content: "\f148"; font-family:Flaticon; margin-right:.2rem}
+#module-imagemanager  .cancel-crop:before{content: "\f12e"; font-family:Flaticon; margin-right:.2rem}
+/* empty */
+.empty{padding:1rem /* "Ничего не найдено" */}

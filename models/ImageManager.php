@@ -1,8 +1,8 @@
 <?php
 
-namespace noam148\imagemanager\models;
+namespace gromovfjodor\imagemanager\models;
 
-use noam148\imagemanager\Module;
+use gromovfjodor\imagemanager\Module;
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;

@@ -10,19 +10,19 @@ The preferred way to install this extension is through [composer](http://getcomp
 * Either run
 
 ```
-php composer.phar require "noam148/yii2-image-manager" "*" 
+php composer.phar require "gromovfjodor/yii2-image-manager" "*" 
 ```
 or add
 
 ```json
-"noam148/yii2-image-manager" : "*"
+"gromovfjodor/yii2-image-manager" : "*"
 ```
 
 to the require section of your application's `composer.json` file.
 
 * Run the migrate to create the ImageManager table
 ```
-yii migrate --migrationPath=@noam148/imagemanager/migrations
+yii migrate --migrationPath=@gromovfjodor/imagemanager/migrations
 ```
 
 * Add a new component in `components` section of your application's configuration file, for example:
@@ -30,7 +30,7 @@ yii migrate --migrationPath=@noam148/imagemanager/migrations
 ```php
 'components' => [
     'imagemanager' => [
-		'class' => 'noam148\imagemanager\components\ImageManagerGetPath',
+		'class' => 'gromovfjodor\imagemanager\components\ImageManagerGetPath',
 		//set media path (outside the web folder is possible)
 		'mediaPath' => '/path/where/to/store/images/media/imagemanager',
         //path relative web folder. In case of multiple environments (frontend, backend) add more paths 
@@ -49,7 +49,7 @@ and in `modules` section, for example:
 ```php
 'modules' => [
 	'imagemanager' => [
-		'class' => 'noam148\imagemanager\Module',
+		'class' => 'gromovfjodor\imagemanager\Module',
 		//set accces rules ()
 		'canUploadImage' => true,
 		'canRemoveImage' => function(){
@@ -78,7 +78,7 @@ http://www.example.com/imagemanager
 To load the image picker see below (make sure you have a field in you table where the module can store 'id' of the ImageManager table):
 
 ```php
-echo $form->field($model, 'ImageManager_id_avatar')->widget(\noam148\imagemanager\components\ImageManagerInputWidget::className(), [
+echo $form->field($model, 'ImageManager_id_avatar')->widget(\gromovfjodor\imagemanager\components\ImageManagerInputWidget::className(), [
 	'aspectRatio' => (16/9), //set the aspect ratio
     'cropViewMode' => 1, //crop mode, option info: https://github.com/fengyuanchen/cropper/#viewmode
 	'showPreview' => true, //false to hide the preview
