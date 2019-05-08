@@ -43,7 +43,7 @@ var imageManagerInput = {
 		//set iframe path
 		$("#modal-imagemanager iframe").attr("src",imageManagerUrl);
                 //set translation title for modal header
-                $("#modal-imagemanager .modal-dialog .modal-header h4").text(imageManagerInput.message.imageManager); 
+                $("#modal-imagemanager .modal-dialog .modal-header h4").text(imageManagerInput.message.imageManager);
 		//open modal
 		$("#modal-imagemanager").modal("show");
 	},
@@ -63,8 +63,8 @@ var imageManagerInput = {
 			if(confirm(imageManagerInput.message.detachWarningMessage) == false){
 				return false;
 			}
-		}		
-		//set input data		
+		}
+		//set input data
 		$('#'+sFieldId).val("");
 		$('#'+sFieldNameId).val("");
 		//trigger change
@@ -79,7 +79,7 @@ var imageManagerInput = {
 $(document).ready(function () {
 	//init Image manage
 	imageManagerInput.init();
-	
+
 	//open media manager modal
 	$(document).on("click", ".open-modal-imagemanager", function () {
 		var aspectRatio = $(this).data("aspect-ratio");
@@ -87,12 +87,12 @@ $(document).ready(function () {
 		var inputId = $(this).data("input-id");
 		//open selector id
 		imageManagerInput.openModal(inputId, aspectRatio, cropViewMode);
-	});	
-	
+	});
+
 	//delete picked image
 	$(document).on("click", ".delete-selected-image", function () {
 		var inputId = $(this).data("input-id");
 		//open selector id
 		imageManagerInput.deletePickedImage(inputId);
-	});	
+	});
 });

@@ -10,7 +10,8 @@ use yii\helpers\Url;
 use gromovfjodor\imagemanager\models\ImageManager;
 use gromovfjodor\imagemanager\assets\ImageManagerInputAsset;
 
-class ImageManagerInputWidget extends InputWidget {
+class ImageManagerInputWidget extends InputWidget
+{
 
     /**
      * @var null|integer The aspect ratio the image needs to be cropped in (optional)
@@ -33,16 +34,32 @@ class ImageManagerInputWidget extends InputWidget {
     public $showDeletePickedImageConfirm = false;
 
     /**
+     * @var bool Скрыть кнопку очистки изображения
+     */
+    public $hideDeleteButton = false;
+
+    /**
+     * @var bool Автоматически показывать выбор изображения при отображении страницы
+     */
+    public $autoOpenModal = false;
+
+    /**
+     * @var string|null $id Идентификатор элемента
+     */
+    public $id = null;
+
+    /**
      * @inheritdoc
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
         //set language
         if (!isset(Yii::$app->i18n->translations['imagemanager'])) {
             Yii::$app->i18n->translations['imagemanager'] = [
-                'class' => 'yii\i18n\PhpMessageSource',
+                'class'          => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
-                'basePath' => '@gromovfjodor/imagemanager/messages'
+                'basePath'       => '@gromovfjodor/imagemanager/messages',
             ];
         }
     }
@@ -50,32 +67,33 @@ class ImageManagerInputWidget extends InputWidget {
     /**
      * @inheritdoc
      */
-    public function run() {
+    public function run()
+    {
         //default
         $ImageManager_id = null;
-        $mImageManager = null;
-        $sFieldId = null;
+        $mImageManager   = null;
+        $sFieldId        = $this->id;
         //start input group
         $field = "<div class='image-manager-input'>";
         $field .= "<div class='input-group'>";
         //set input fields
         if ($this->hasModel()) {
             //get field id
-            $sFieldId = Html::getInputId($this->model, $this->attribute);
+            $sFieldId     = Html::getInputId($this->model, $this->attribute);
             $sFieldNameId = $sFieldId . "_name";
             //get attribute name
             $sFieldAttributeName = Html::getAttributeName($this->attribute);
             //get filename from selected file
-            $ImageManager_id = $this->model->{$sFieldAttributeName};
+            $ImageManager_id       = $this->model->{$sFieldAttributeName};
             $ImageManager_fileName = null;
-            $mImageManager = ImageManager::findOne($ImageManager_id);
+            $mImageManager         = ImageManager::findOne($ImageManager_id);
             if ($mImageManager !== null) {
                 $ImageManager_fileName = $mImageManager->fileName;
             }
 
             //show preview if is true
             if ($this->showPreview == true) {
-                $sHideClass = ($mImageManager == null) ? "hide" : "";
+                $sHideClass   = ($mImageManager == null) ? "hide" : "";
                 $sImageSource = isset($mImageManager->id) ? \Yii::$app->imagemanager->getImagePath($mImageManager->id, 500, 500, 'inset') : "";
 
                 $field .= '<div class="image-wrapper col-12 ' . $sHideClass . '">'
@@ -92,8 +110,12 @@ class ImageManagerInputWidget extends InputWidget {
         }
         //end input group
         $sHideClass = $ImageManager_id === null ? 'hide' : '';
-        $field .= "<span class='input-group-addon btn btn-clear hide btn-danger delete-selected-image" . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></span>";
-        $field .= "<span class='input-group-addon btn btn-open btn-primary open-modal-imagemanager' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
+        if (!$this->hideDeleteButton) {
+            $field .= "<span class='input-group-addon btn btn-clear hide btn-danger delete-selected-image" . $sHideClass . "' data-input-id='" . $sFieldId . "' data-show-delete-confirm='" . ($this->showDeletePickedImageConfirm ? "true" : "false") . "'></span>";
+        }
+        // auto open class
+        $autoOpen = $this->autoOpenModal ? 'auto-open-modal-imagemanager' : '';
+        $field .= "<span class='input-group-addon btn btn-open btn-primary open-modal-imagemanager $autoOpen' data-aspect-ratio='" . $this->aspectRatio . "' data-crop-view-mode='" . $this->cropViewMode . "' data-input-id='" . $sFieldId . "'>";
         $field .= "<i class='glyphicon glyphicon-folder-open' aria-hidden='true'></i>";
         $field .= "</span></div>";
 
@@ -108,7 +130,8 @@ class ImageManagerInputWidget extends InputWidget {
     /**
      * Registers js Input
      */
-    public function registerClientScript() {
+    public function registerClientScript()
+    {
         $view = $this->getView();
         ImageManagerInputAsset::register($view);
 
@@ -117,9 +140,22 @@ class ImageManagerInputWidget extends InputWidget {
         //set base url
         $view->registerJs("imageManagerInput.baseUrl = '" . $sBaseUrl . "';");
         $view->registerJs("imageManagerInput.message = " . Json::encode([
-                    'imageManager' => Yii::t('imagemanager','Image manager'),
-                    'detachWarningMessage' => Yii::t('imagemanager', 'Are you sure you want to detach the image?'),
-                ]) . ";");
+                'imageManager'         => Yii::t('imagemanager', 'Image manager'),
+                'detachWarningMessage' => Yii::t('imagemanager', 'Are you sure you want to detach the image?'),
+            ]) . ";");
+
+        if ($this->autoOpenModal) {
+            $view->registerJs('
+            //open media manager modal
+	        $(".auto-open-modal-imagemanager").each(function () {
+		        var aspectRatio = $(this).data("aspect-ratio");
+		        var cropViewMode = $(this).data("crop-view-mode");
+		        var inputId = $(this).data("input-id");
+		        //open selector id
+		        imageManagerInput.openModal(inputId, aspectRatio, cropViewMode);
+	        });
+            ');
+        }
     }
 
 }
