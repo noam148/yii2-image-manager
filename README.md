@@ -1,5 +1,7 @@
-Sorry the module is no longer maintained anymore
-------------------------------------------------
+!!! Sorry, the module is no longer maintained by me anymore !!!
+-
+!!! Feel free to further develop the module !!!
+-
 
 Image manager for Yii2
 ========================
