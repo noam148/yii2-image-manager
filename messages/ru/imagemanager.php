@@ -8,10 +8,10 @@ return [
 	'Crop and select' => 'Обрезать и выбрать',
 	'Delete' => 'Удалить',
 	'File hash' => 'Хеш файла',
-    'File name' => 'Имя файла',
-	'Modified' => 'Измененл',
+        'File name' => 'Имя файла',
+	'Modified' => 'Изменено',
 	'Search' => 'Поиск',
 	'Select' => 'Выбрать',
 	'Image manager' => 'Менеджер изображений',
-    'Upload' => 'Загрузить'
+        'Upload' => 'Загрузить'
 ];
